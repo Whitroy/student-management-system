@@ -17,7 +17,7 @@ const App: React.FC<Props> = (props) => {
 					</Route>
 					<Route
 						path={[
-							"/dashborad",
+							"/dashboard",
 							"/recordings/batch/:batchNumber/lecture/:lectureNumber",
 						]}
 						exact

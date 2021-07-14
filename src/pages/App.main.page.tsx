@@ -11,7 +11,7 @@ const MainApp: React.FC<Props> = (props) => {
 		<div className="flex">
 			<SideBar />
 			<Switch>
-				<Route path="/dashborad">
+				<Route path="/dashboard">
 					<DashboardPage />
 				</Route>
 				<Route path="/recordings/batch/:batchNumber/lecture/:lectureNumber">
