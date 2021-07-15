@@ -3,6 +3,10 @@ module.exports = {
   darkMode: false, // or 'media' or 'class'
   theme: {
     extend: {},
+    fill: theme => ({
+      'blue-200': theme('colors.blue.200'),
+      'blue-400': theme('colors.blue.400'),
+    })
   },
   variants: {
     extend: {},

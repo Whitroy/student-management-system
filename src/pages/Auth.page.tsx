@@ -8,7 +8,7 @@ interface Props {}
 
 const Auth: React.FC<Props> = (props) => {
 	return (
-		<div className="flex flex-row justify-between items-center">
+		<div className="flex flex-row justify-center items-center">
 			<Switch>
 				<Route path="/signup">
 					<SignUpPage />

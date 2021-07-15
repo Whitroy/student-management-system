@@ -5,7 +5,7 @@ interface Props {}
 
 const SignUp: React.FC<Props> = (props) => {
 	return (
-		<div>
+		<div className="flex-1">
 			<p>This is sign up Page</p>
 			<p>
 				Already have an account?
