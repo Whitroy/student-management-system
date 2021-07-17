@@ -22,8 +22,8 @@ const Login: React.FC<Props> = (props) => {
 		console.log("submitting");
 		setProcessing(true);
 		setTimeout(() => {
-			history.push("/dashboard");
 			setProcessing(false);
+			history.push("/dashboard");
 		}, 5000);
 	};
 
@@ -61,7 +61,7 @@ const Login: React.FC<Props> = (props) => {
 					/>
 					<div className="mt-4 flex justify-between items-center">
 						<p>Show Password</p>
-						<Button type="submit" disabled={processing}>
+						<Button type="submit">
 							<div className="flex justify-start items-center space-x-1">
 								{!processing && <BsLock />}
 								{processing && <FaSpinner className=" animate-spin" />}
