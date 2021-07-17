@@ -6,6 +6,9 @@ module.exports = {
       boxShadow: {
         'blue': '0 10px 8px -6px rgba(33, 132, 243, 0.5)',
       }
+      , width: {
+        '68' : '17rem'
+      }
     },
     fill: theme => ({
       'blue-200': theme('colors.blue.200'),
