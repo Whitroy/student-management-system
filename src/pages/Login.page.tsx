@@ -1,5 +1,5 @@
-import React, { FormEvent, useState } from "react";
-import { Link, useHistory } from "react-router-dom";
+import React, { useState } from "react";
+import { useHistory } from "react-router-dom";
 import Input from "../components/Input";
 import { FiUser } from "react-icons/fi";
 import { HiLockClosed } from "react-icons/hi";
@@ -9,23 +9,45 @@ import H1 from "../components/H1";
 import P from "../components/P";
 import { BsLock } from "react-icons/bs";
 import { FaSpinner } from "react-icons/fa";
+import { useFormik } from "formik";
+import * as yup from "yup";
+import ToggleButton from "../components/ToggleButton";
 
 interface Props {}
 
 const Login: React.FC<Props> = (props) => {
-	const [processing, setProcessing] = useState(false);
-
 	const history = useHistory();
+	const [showPassword, setShowPassword] = useState(false);
+	const {
+		handleSubmit,
+		touched,
+		isSubmitting,
+		setSubmitting,
+		isValid,
+		errors,
+		getFieldProps,
+	} = useFormik({
+		initialValues: {
+			email: "",
+			password: "",
+		},
 
-	const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
-		event.preventDefault();
-		console.log("submitting");
-		setProcessing(true);
-		setTimeout(() => {
-			setProcessing(false);
-			history.push("/dashboard");
-		}, 5000);
-	};
+		validationSchema: yup.object().shape({
+			email: yup.string().required().email(),
+			password: yup
+				.string()
+				.required()
+				.min(8, ({ min }) => `At least ${min} char!!!`),
+		}),
+
+		onSubmit: () => {
+			console.log("Submitting!");
+			setTimeout(() => {
+				setSubmitting(false);
+				history.push("/dashboard");
+			}, 5000);
+		},
+	});
 
 	return (
 		<div className="flex-1">
@@ -34,37 +56,43 @@ const Login: React.FC<Props> = (props) => {
 					Log In to <RouteLink to="/login">SMS</RouteLink>
 				</H1>
 				<P className="mt-3">
-					New Here?{" "}
-					<Link to="/signup" className="text-blue-500">
-						Create an account
-					</Link>
+					New Here? Log In to{" "}
+					<RouteLink to="/signup">Create an account</RouteLink>
 				</P>
 				<form className="mt-16" onSubmit={handleSubmit}>
 					<Input
+						id="email"
 						type="email"
 						placeholder="Email address"
-						name="email"
 						required
 						autoComplete="email"
-						validateType="email"
 						icon={<FiUser className="w-6 h-6 fill-blue-200" />}
+						{...getFieldProps("email")}
+						touched={touched.email}
+						errors={errors.email}
 					/>
 					<Input
-						type="password"
+						id="password"
+						type={showPassword ? "text" : "password"}
 						placeholder="Password"
-						name="password"
 						required
 						autoComplete="current-password"
 						icon={<HiLockClosed className="w-6 h-6 fill-blue-400" />}
 						className="mt-5"
-						validateType="password"
+						{...getFieldProps("password")}
+						touched={touched.password}
+						errors={errors.password}
 					/>
 					<div className="mt-4 flex justify-between items-center">
-						<p>Show Password</p>
-						<Button type="submit">
+						<ToggleButton
+							label="show password"
+							checked={showPassword}
+							onChange={setShowPassword}
+						/>
+						<Button type="submit" disabled={!isValid}>
 							<div className="flex justify-start items-center space-x-1">
-								{!processing && <BsLock />}
-								{processing && <FaSpinner className=" animate-spin" />}
+								{!isSubmitting && <BsLock />}
+								{isSubmitting && <FaSpinner className=" animate-spin" />}
 								<p>Log in</p>
 							</div>
 						</Button>

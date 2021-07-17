@@ -6,13 +6,20 @@ interface Props extends ButtonHTMLAttributes<HTMLButtonElement> {
 	children: React.ReactNode;
 }
 
-const Button: React.FC<Props> = ({ className, children, ...rest }) => {
+const Button: React.FC<Props> = ({
+	className,
+	children,
+	disabled,
+	...rest
+}) => {
 	return (
 		<button
 			{...rest}
+			disabled={disabled}
 			className={
-				" text-white bg-blue-500 px-4 py-2 rounded-md text-sm shadow-2xl hover:bg-blue-600" +
-				className
+				" text-white px-4 py-2 rounded-md text-sm shadow-blue " +
+				className +
+				(disabled ? " bg-blue-300 " : " bg-blue-500 hover:bg-blue-600")
 			}
 		>
 			{children}
