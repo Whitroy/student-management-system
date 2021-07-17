@@ -1,5 +1,5 @@
 import { Switch } from "@headlessui/react";
-import React, { Dispatch, Fragment, SetStateAction, useState } from "react";
+import React, { Dispatch, Fragment, SetStateAction } from "react";
 
 interface Props {
 	label: string;
