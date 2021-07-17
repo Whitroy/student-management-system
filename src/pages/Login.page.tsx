@@ -50,7 +50,7 @@ const Login: React.FC<Props> = (props) => {
 	});
 
 	return (
-		<div className="flex-1">
+		<div className="flex-1 p-6 pt-12 md:p-0">
 			<div className=" max-w-lg mx-auto p-6">
 				<H1>
 					Log In to <RouteLink to="/login">SMS</RouteLink>
@@ -88,17 +88,18 @@ const Login: React.FC<Props> = (props) => {
 							label="show password"
 							checked={showPassword}
 							onChange={setShowPassword}
+							className="flex-shrink-0"
 						/>
-						<Button type="submit" disabled={!isValid}>
-							<div className="flex justify-start items-center space-x-1">
+						<Button type="submit" disabled={!isValid} className="flex-shrink-0">
+							<div className="flex justify-start items-center space-x-1 ">
 								{!isSubmitting && <BsLock />}
-								{isSubmitting && <FaSpinner className=" animate-spin" />}
+								{isSubmitting && <FaSpinner className=" animate-spin " />}
 								<p>Log in</p>
 							</div>
 						</Button>
 					</div>
 					<div className="flex flex-col items-center mt-10 justify-between">
-						<div className="flex items-center justify-start space-x-2">
+						<div className="flex items-center justify-start space-x-2 flex-shrink-0">
 							<input type="checkbox" className="w-4 h-4" />
 							<span className=" text-gray-400 text-sm">Keep me logged in</span>
 						</div>

@@ -47,7 +47,7 @@ const SignUp: React.FC<Props> = (props) => {
 		},
 	});
 	return (
-		<div className="flex-1">
+		<div className="flex-1 p-6 pt-12 md:p-0">
 			<div className=" max-w-lg mx-auto p-6">
 				<H1 className="max-w-xs">Get started with a free account</H1>
 				<P className="mt-3">
@@ -106,8 +106,9 @@ const SignUp: React.FC<Props> = (props) => {
 							label="show password"
 							checked={showPassword}
 							onChange={setShowPassword}
+							className="flex-shrink-0"
 						/>
-						<Button type="submit" disabled={!isValid}>
+						<Button type="submit" disabled={!isValid} className="flex-shrink-0">
 							<div className="flex justify-start items-center space-x-1">
 								{!isSubmitting && <BsLock />}
 								{isSubmitting && <FaSpinner className=" animate-spin" />}
