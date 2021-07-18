@@ -1,6 +1,9 @@
 import { Transition } from "@headlessui/react";
 import React, { Dispatch, Fragment } from "react";
-import { Link } from "react-router-dom";
+import ExpandableNavLink from "./ExpandableNavLink";
+import { FaHome } from "react-icons/fa";
+import LinkContent from "./LinkContent";
+import { IoIosApps, IoMdMap } from "react-icons/io";
 
 interface Props {
 	show: boolean;
@@ -19,12 +22,26 @@ const SideBar: React.FC<Props> = ({ show, onClose }) => {
 				leaveTo="-translate-x-full"
 				as={Fragment}
 			>
-				<div className=" w-52 transform border-r border-gray-300 ease-in-out bg-gray-100 absolute top-0 bottom-0 left-0 ">
-					<p className="mt-28">This is Side Bar.</p>
-					<Link to="/recordings/batch/1/lecture/1" className="text-blue-500">
-						Button 1
-					</Link>
-					<button>hi</button>
+				<div className=" w-52 transform border-r border-gray-300 ease-in-out bg-gray-100 fixed z-10 top-0 bottom-0 left-0 pt-32 px-4">
+					<ExpandableNavLink
+						title="Dashboard"
+						icon={<FaHome className="w-full h-full" />}
+					>
+						<LinkContent to="/sales" title="Sales" />
+						<LinkContent to="/analytics" title="Analytics" />
+					</ExpandableNavLink>
+					<ExpandableNavLink
+						title="Apps"
+						icon={<IoIosApps className="w-full h-full" />}
+					>
+						<LinkContent to="/chat" title="Chat" />
+						<LinkContent to="/mailbox" title="Mailbox" />
+					</ExpandableNavLink>
+					<ExpandableNavLink
+						title="Maps"
+						icon={<IoMdMap className="w-full h-full" />}
+						to="/maps"
+					/>
 				</div>
 			</Transition.Child>
 		</Transition.Root>

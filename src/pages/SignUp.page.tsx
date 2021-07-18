@@ -9,8 +9,9 @@ import * as yup from "yup";
 import Button from "../components/Button";
 import Input from "../components/Input";
 import { FiUser } from "react-icons/fi";
-import { HiLockClosed, HiOutlineMail } from "react-icons/hi";
+import { HiLockClosed } from "react-icons/hi";
 import ToggleButton from "../components/ToggleButton";
+import { SiMailDotRu } from "react-icons/si";
 
 interface Props {}
 
@@ -74,7 +75,7 @@ const SignUp: React.FC<Props> = (props) => {
 						placeholder="Email Address"
 						required
 						autoComplete="email"
-						icon={<HiOutlineMail className="w-6 h-6 fill-blue-200" />}
+						icon={<SiMailDotRu className="w-6 h-6 fill-blue-400" />}
 						className="mt-5"
 						{...getFieldProps("email")}
 						touched={touched.email}

@@ -9,7 +9,7 @@ import RecordingsPage from "./Recordings.page";
 interface Props {}
 
 const MainApp: React.FC<Props> = (props) => {
-	const [menuOpen, setMenuOpen] = useState(true);
+	const [menuOpen, setMenuOpen] = useState(false);
 
 	const handleMenuClick = () => {
 		setMenuOpen((open) => !open);
@@ -21,17 +21,15 @@ const MainApp: React.FC<Props> = (props) => {
 				<NavBar />
 				<Header handleMenuClick={handleMenuClick} />
 			</div>
-			<div className="relative">
-				<SideBar show={menuOpen} onClose={setMenuOpen} />
-				<Switch>
-					<Route path="/dashboard">
-						<DashboardPage grow={menuOpen} />
-					</Route>
-					<Route path="/recordings/batch/:batchNumber/lecture/:lectureNumber">
-						<RecordingsPage />
-					</Route>
-				</Switch>
-			</div>
+			<SideBar show={menuOpen} onClose={setMenuOpen} />
+			<Switch>
+				<Route path="/dashboard">
+					<DashboardPage grow={menuOpen} />
+				</Route>
+				<Route path="/recordings/batch/:batchNumber/lecture/:lectureNumber">
+					<RecordingsPage />
+				</Route>
+			</Switch>
 		</>
 	);
 };

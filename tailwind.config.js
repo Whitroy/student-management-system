@@ -8,6 +8,10 @@ module.exports = {
       }
       , width: {
         '68' : '17rem'
+      },
+      margin: {
+        "1/5": "20%",
+        "1/10":"10%"
       }
     },
     fill: theme => ({
