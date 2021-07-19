@@ -29,12 +29,12 @@ const ExpandableNavLink: React.FC<Props> = ({ title, icon, children, to }) => {
 	return (
 		<div>
 			<NavLink
-				to={to ? to : "#"}
-				className=" bg-gray-100"
+				to={to ? to : `${title.toLowerCase()}`}
+				className="block hover:bg-gray-300 rounded-md shadow"
 				onClick={handleClick}
-				activeClassName=" bg-white"
+				activeClassName=" bg-white "
 			>
-				<div className="flex items-center justify-between rounded-md py-2 px-3 hover:bg-gray-300 ">
+				<div className="flex items-center justify-between py-2 px-3 ">
 					<div className="flex items-center justify-start space-x-2">
 						<div className="w-5 h-5">{icon}</div>
 						<H2 className=" text-base font-semibold ">{title}</H2>

@@ -46,13 +46,15 @@ const DropDown: React.FC<Props> = ({ title, children }) => {
 								{children.map((item, index) => (
 									<Menu.Item key={item.props.name + index} as={Fragment}>
 										{({ active }) => {
-											if (active) setCurrentActive(item.props.name);
 											return (
 												<Link
 													to={item.props.to}
 													className={`${
 														active && "text-blue-500 bg-gray-50"
 													} px-2 py-1.5 `}
+													onPointerEnter={() => {
+														setCurrentActive(item.props.name);
+													}}
 												>
 													{item.props.name}
 												</Link>
