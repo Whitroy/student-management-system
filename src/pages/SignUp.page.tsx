@@ -6,7 +6,7 @@ import { useFormik } from "formik";
 import { BsLock } from "react-icons/bs";
 import { FaSpinner } from "react-icons/fa";
 import * as yup from "yup";
-import Button from "../components/Button";
+import Button from "../components/Button/Button";
 import Input from "../components/Input";
 import { FiUser } from "react-icons/fi";
 import { HiLockClosed } from "react-icons/hi";
@@ -111,12 +111,14 @@ const SignUp: React.FC<Props> = (props) => {
 							onChange={setShowPassword}
 							className="flex-shrink-0"
 						/>
-						<Button type="submit" disabled={!isValid} className="flex-shrink-0">
-							<div className="flex justify-start items-center space-x-1">
-								{!isSubmitting && <BsLock />}
-								{isSubmitting && <FaSpinner className=" animate-spin" />}
-								<p>Get Started!</p>
-							</div>
+						<Button
+							type="submit"
+							disabled={!isValid}
+							className="flex-shrink-0"
+							Icon={isSubmitting ? FaSpinner : BsLock}
+							iconAnimation={isSubmitting ? "spin" : "none"}
+						>
+							Get Started!
 						</Button>
 					</div>
 				</form>

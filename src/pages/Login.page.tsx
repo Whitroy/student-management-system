@@ -3,7 +3,7 @@ import { useHistory } from "react-router-dom";
 import Input from "../components/Input";
 import { FiUser } from "react-icons/fi";
 import { HiLockClosed } from "react-icons/hi";
-import Button from "../components/Button";
+import Button from "../components/Button/Button";
 import RouteLink from "../components/RouteLink";
 import H1 from "../components/H1";
 import P from "../components/P";
@@ -91,12 +91,14 @@ const Login: React.FC<Props> = (props) => {
 							onChange={setShowPassword}
 							className="flex-shrink-0"
 						/>
-						<Button type="submit" disabled={!isValid} className="flex-shrink-0">
-							<div className="flex justify-start items-center space-x-1 ">
-								{!isSubmitting && <BsLock />}
-								{isSubmitting && <FaSpinner className=" animate-spin " />}
-								<p>Log in</p>
-							</div>
+						<Button
+							type="submit"
+							disabled={!isValid}
+							className="flex-shrink-0"
+							Icon={isSubmitting ? FaSpinner : BsLock}
+							iconAnimation={isSubmitting ? "spin" : "none"}
+						>
+							Log in
 						</Button>
 					</div>
 					<div className="flex flex-col items-center mt-10 justify-between">

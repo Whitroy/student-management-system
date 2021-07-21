@@ -25,7 +25,7 @@ const ToggleButton: React.FC<Props> = ({
 					onChange={setEnable}
 					className={`${
 						enable ? "bg-blue-500" : "bg-gray-200"
-					} relative inline-flex items-center h-4 rounded-full w-7 ml-2  `}
+					} relative inline-flex items-center h-4 rounded-full w-7 ml-2 focus:outline-none focus:ring-2`}
 				>
 					<span className="sr-only"></span>
 					<span
