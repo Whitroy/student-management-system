@@ -66,7 +66,7 @@ const SignUp: React.FC<Props> = (props) => {
 						autoComplete="username"
 						touched={touched.username}
 						errors={errors.username}
-						icon={<FiUser className="w-6 h-6 fill-blue-200" />}
+						Icon={FiUser}
 						{...getFieldProps("username")}
 					/>
 					<Input
@@ -75,7 +75,8 @@ const SignUp: React.FC<Props> = (props) => {
 						placeholder="Email Address"
 						required
 						autoComplete="email"
-						icon={<SiMailDotRu className="w-6 h-6 fill-blue-400" />}
+						Icon={SiMailDotRu}
+						iconClassName="fill-blue-400"
 						className="mt-5"
 						{...getFieldProps("email")}
 						touched={touched.email}
@@ -87,8 +88,9 @@ const SignUp: React.FC<Props> = (props) => {
 						placeholder="Password"
 						required
 						autoComplete="current-password"
-						icon={<HiLockClosed className="w-6 h-6 fill-blue-400" />}
+						Icon={HiLockClosed}
 						className="mt-5"
+						iconClassName="fill-blue-400"
 						{...getFieldProps("password")}
 						touched={touched.password}
 						errors={errors.password}

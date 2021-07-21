@@ -23,25 +23,15 @@ const SideBar: React.FC<Props> = ({ show, onClose }) => {
 				as={Fragment}
 			>
 				<div className=" w-52 transform border-r border-gray-300 ease-in-out bg-gray-100 fixed z-10 top-0 bottom-0 left-0 pt-32 px-4">
-					<ExpandableNavLink
-						title="Dashboard"
-						icon={<FaHome className="w-full h-full" />}
-					>
+					<ExpandableNavLink title="Dashboard" Icon={FaHome}>
 						<LinkContent to="/sales" title="Sales" />
 						<LinkContent to="/analytics" title="Analytics" />
 					</ExpandableNavLink>
-					<ExpandableNavLink
-						title="Apps"
-						icon={<IoIosApps className="w-full h-full" />}
-					>
+					<ExpandableNavLink title="Apps" Icon={IoIosApps}>
 						<LinkContent to="/chat" title="Chat" />
 						<LinkContent to="/mailbox" title="Mailbox" />
 					</ExpandableNavLink>
-					<ExpandableNavLink
-						title="Maps"
-						icon={<IoMdMap className="w-full h-full" />}
-						to="/maps"
-					/>
+					<ExpandableNavLink title="Maps" Icon={IoMdMap} to="/maps" />
 				</div>
 			</Transition.Child>
 		</Transition.Root>

@@ -66,7 +66,7 @@ const Login: React.FC<Props> = (props) => {
 						placeholder="Email address"
 						required
 						autoComplete="email"
-						icon={<FiUser className="w-6 h-6 fill-blue-200" />}
+						Icon={FiUser}
 						{...getFieldProps("email")}
 						touched={touched.email}
 						errors={errors.email}
@@ -77,8 +77,9 @@ const Login: React.FC<Props> = (props) => {
 						placeholder="Password"
 						required
 						autoComplete="current-password"
-						icon={<HiLockClosed className="w-6 h-6 fill-blue-400" />}
+						Icon={HiLockClosed}
 						className="mt-5"
+						iconClassName="fill-blue-400"
 						{...getFieldProps("password")}
 						touched={touched.password}
 						errors={errors.password}

@@ -3,15 +3,16 @@ import { NavLink } from "react-router-dom";
 import { HiChevronUp } from "react-icons/hi";
 import H2 from "./H2";
 import LinkContent from "./LinkContent";
+import { IconType } from "react-icons";
 
 interface Props {
 	title: string;
-	icon: React.ReactNode;
+	Icon: IconType;
 	children?: React.ReactElement[];
 	to?: string;
 }
 
-const ExpandableNavLink: React.FC<Props> = ({ title, icon, children, to }) => {
+const ExpandableNavLink: React.FC<Props> = ({ title, Icon, children, to }) => {
 	children?.forEach((value) => {
 		if (value.type !== LinkContent)
 			throw new Error(
@@ -29,14 +30,14 @@ const ExpandableNavLink: React.FC<Props> = ({ title, icon, children, to }) => {
 	return (
 		<div>
 			<NavLink
-				to={to ? to : `${title.toLowerCase()}`}
+				to={to && to !== "" ? to : `${title.toLowerCase()}`}
 				className="block hover:bg-gray-300 rounded-md shadow"
 				onClick={handleClick}
 				activeClassName=" bg-white "
 			>
 				<div className="flex items-center justify-between py-2 px-3 ">
 					<div className="flex items-center justify-start space-x-2">
-						<div className="w-5 h-5">{icon}</div>
+						<Icon className="w-5 h-5" />
 						<H2 className=" text-base font-semibold ">{title}</H2>
 					</div>
 					{!to && (

@@ -1,24 +1,28 @@
 import React, { InputHTMLAttributes } from "react";
-import { ReactElement } from "react";
+import { IconType } from "react-icons";
 
 interface Props extends InputHTMLAttributes<HTMLInputElement> {
 	className?: string;
-	icon: ReactElement;
+	Icon: IconType;
 	errors?: string;
 	touched?: boolean;
+	iconClassName?: string;
 }
 
 const Input: React.FC<Props> = ({
-	icon,
+	Icon,
 	className,
 	touched,
 	errors,
+	iconClassName,
 	...rest
 }) => {
 	return (
 		<div className={" w-full h-14 " + className}>
 			<div className="flex items-center space-x-2">
-				<div className="text-blue-500">{icon}</div>
+				<Icon
+					className={`text-blue-500 w-6 h-6 fill-blue-200 ${iconClassName}`}
+				/>
 				<div className="w-full">
 					{rest.id && rest.placeholder && (
 						<label htmlFor={rest.id} className="sr-only">
