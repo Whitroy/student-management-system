@@ -16,33 +16,32 @@ const ProgressBar: React.FC<Props> = ({ progressPercentage, theme }) => {
 
 	switch (theme) {
 		case "success":
-			color = "green";
+			color = "bg-green-500";
 			break;
 
 		case "danger":
-			color = "red";
+			color = "bg-red-500";
 			break;
 
 		case "warning":
-			color = "yellow";
+			color = "bg-yellow-500";
 			break;
 
 		case "secondary":
-			color = "gray";
+			color = "bg-gray-500";
 			break;
 
 		case "primary":
-			color = "blue";
+			color = "bg-blue-500";
 			break;
 	}
 
-	const barClasses = `bg-${color}-500`;
 	return (
 		<div className="w-full h-4 rounded-lg bg-gray-100 relative">
 			<div
 				className={
 					"absolute h-4 shadow-lg rounded-lg transform transition-width ease-in-out duration-150 " +
-					barClasses
+					color
 				}
 				style={{
 					width: `${progressPercentage}%`,
