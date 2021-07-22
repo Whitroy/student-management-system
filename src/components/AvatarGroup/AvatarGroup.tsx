@@ -7,10 +7,10 @@ interface Props {
 }
 
 const AvatarGroup: React.FC<Props> = ({ children }) => {
-	children.forEach((value) => {
-		if (value.type !== Avatar)
-			throw new Error(`Avatar is expected as child but found ${value.type}`);
-	});
+	// children.forEach((value) => {
+	// 	if (value.type !== Avatar)
+	// 		throw new Error(`Avatar is expected as child but found ${value.type}`);
+	// });
 
 	const min = (a: number, b: number) => (a > b ? b : a);
 
