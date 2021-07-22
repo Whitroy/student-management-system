@@ -1,5 +1,5 @@
 import React, { Dispatch } from "react";
-import MenuItem from "./MeuItem";
+import MenuItem from "./MenuItem";
 import { FaHome } from "react-icons/fa";
 import LinkContent from "./LinkContent";
 import { IoIosApps, IoMdMap } from "react-icons/io";

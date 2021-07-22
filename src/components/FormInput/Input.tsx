@@ -33,7 +33,7 @@ const Input: React.FC<Props> = ({
 				</div>
 			</div>
 			<hr className=" text-black mt-3" />
-			{touched && <div className="text-sm text-red-600">{errors}</div>}
+			{touched && <div className="text-sm text-red-600 mt-1">{errors}</div>}
 		</div>
 	);
 };

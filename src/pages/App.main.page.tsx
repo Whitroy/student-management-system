@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { Route, Switch } from "react-router-dom";
 import Header from "../components/Header";
 import NavBar from "../components/NavBar";
-import SideBar from "../components/SideBar";
+import SideBar from "../components/SideBar/SideBar";
 import DashboardPage from "./Dashboard.page";
 import RecordingsPage from "./Recordings.page";
 

@@ -1,7 +1,7 @@
 import React from "react";
 import { HiOutlineMenu } from "react-icons/hi";
-import DropDown from "../components/DropDown";
-import Item from "../components/Item";
+import DropDown from "./DropDown/DropDown";
+import Item from "./DropDown/Item";
 import H2 from "./H2";
 
 interface Props {

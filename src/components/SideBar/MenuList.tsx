@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import ExpandableNavLink from "./ExpandableNavLink";
-import MenuItem from "./MeuItem";
+import MenuItem from "./MenuItem";
 
 interface Props {
 	children: React.ReactElement[];

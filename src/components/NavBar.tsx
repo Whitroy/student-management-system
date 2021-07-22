@@ -1,8 +1,8 @@
 import React from "react";
 import H1 from "./H1";
 import HeroIcon from "../Img/HeroImg.webp";
-import PopOver from "./PopOver";
-import PopOverItem from "./PopOverItem";
+import PopOver from "./PopOver/PopOver";
+import PopOverItem from "./PopOver/PopOverItem";
 import { Link } from "react-router-dom";
 import { FiUser, FiInbox } from "react-icons/fi";
 import { HiLockClosed } from "react-icons/hi";

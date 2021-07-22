@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useHistory } from "react-router-dom";
-import Input from "../components/Input";
+import Input from "../components/FormInput/Input";
 import { FiUser } from "react-icons/fi";
 import { HiLockClosed } from "react-icons/hi";
 import Button from "../components/Button/Button";

@@ -9,7 +9,7 @@ interface Props {
 	to?: string;
 }
 
-const MeuItem: React.FC<Props> = ({ children }) => {
+const MenuItem: React.FC<Props> = ({ children }) => {
 	children?.forEach((value) => {
 		if (value.type !== LinkContent)
 			throw new Error(
@@ -19,6 +19,6 @@ const MeuItem: React.FC<Props> = ({ children }) => {
 	return <></>;
 };
 
-MeuItem.defaultProps = {};
+MenuItem.defaultProps = {};
 
-export default React.memo(MeuItem);
+export default React.memo(MenuItem);
