@@ -16,7 +16,11 @@ module.exports = {
       margin: {
         "1/5": "20%",
         "1/10":"10%"
-      }
+      },
+      transitionProperty: {
+        'height': 'height',
+        'width':'width',
+      },
     },
     fill: theme => ({
       'blue-200': theme('colors.blue.200'),

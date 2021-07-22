@@ -18,7 +18,13 @@ const AvatarGroup: React.FC<Props> = ({ children }) => {
 
 	let avatars: ReactElement[] = [];
 	for (let index = 0; index < min(4, children.length); index++) {
-		avatars.push(children[index]);
+		avatars.push(
+			<Avatar
+				{...children[index].props}
+				{...children[index].key}
+				className="transform transition-transform hover:-translate-y-1 translate-y-0 duration-200"
+			/>
+		);
 	}
 
 	return (

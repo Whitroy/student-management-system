@@ -8,7 +8,7 @@ const Dashboard: React.FC<Props> = ({ grow }) => {
 	return (
 		<div className="flex">
 			<div
-				className={` bg-gray-100 transition-all duration-500 ease-in-out ${
+				className={` bg-gray-100 transition-width duration-500 ease-in-out ${
 					grow ? "w-68" : "w-0"
 				}`}
 			></div>

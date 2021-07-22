@@ -3,17 +3,29 @@ import React from "react";
 interface Props {
 	showOnline?: boolean;
 	online?: boolean;
+	src?: string;
 	appearance?: "rounded" | "default";
+	className?: string;
 }
 
-const Avatar: React.FC<Props> = ({ showOnline, online, appearance }) => {
+const Avatar: React.FC<Props> = ({
+	showOnline,
+	online,
+	appearance,
+	src,
+	className,
+}) => {
 	return (
 		<div
-			className={`border-2 bg-white shadow-sm relative border-black w-16 h-16 ${
+			className={`bg-white shadow-sm relative w-16 h-16 ${
 				appearance === "rounded" ? "rounded-full" : "rounded-md"
-			} object-cover transform transition-transform hover:-translate-y-1 translate-y-0 duration-200`}
+			} ${className}`}
 		>
-			<img alt="" src="" />
+			<img
+				alt="Avatar"
+				src={src}
+				className="object-cover rounded-full border-2 border-white "
+			/>
 			{showOnline && (
 				<div
 					className={`w-4 h-4 rounded-full border-2 absolute ${
@@ -29,6 +41,9 @@ Avatar.defaultProps = {
 	showOnline: true,
 	online: false,
 	appearance: "default",
+	className: "",
+	src:
+		"https://thumbs.dreamstime.com/b/default-avatar-man-to-social-user-vector-illustration-default-avatar-man-to-social-user-109538868.jpg",
 };
 
 export default React.memo(Avatar);

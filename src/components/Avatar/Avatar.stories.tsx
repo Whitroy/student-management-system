@@ -8,7 +8,7 @@ export default {
 } as Meta;
 
 const Template: Story<ComponentProps<typeof Avatar>> = (args) => (
-	<Avatar {...args}></Avatar>
+	<Avatar {...args} />
 );
 
 export const main = Template.bind({});

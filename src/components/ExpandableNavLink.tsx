@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import { NavLink } from "react-router-dom";
 import { HiChevronUp } from "react-icons/hi";
 import H2 from "./H2";
@@ -10,27 +10,39 @@ interface Props {
 	Icon: IconType;
 	children?: React.ReactElement[];
 	to?: string;
+	collapse: boolean;
+	index: number;
+	handleCollapse: (index: number) => void;
 }
 
-const ExpandableNavLink: React.FC<Props> = ({ title, Icon, children, to }) => {
+const ExpandableNavLink: React.FC<Props> = ({
+	title,
+	Icon,
+	children,
+	to,
+	collapse,
+	index,
+	handleCollapse,
+}) => {
 	children?.forEach((value) => {
 		if (value.type !== LinkContent)
 			throw new Error(
 				`Link Component is expected as childreb but found ${value.type}`
 			);
 	});
-	const [collapse, setCollapse] = useState(true);
 
 	const handleClick = () => {
 		if (!to) {
-			setCollapse((open) => !open);
+			handleCollapse(index);
 		}
 	};
+
+	const listSize = children?.length;
 
 	return (
 		<div>
 			<NavLink
-				to={to && to !== "" ? to : `${title.toLowerCase()}`}
+				to={to && to !== "" ? to : "#"}
 				className="block hover:bg-gray-300 rounded-md hover:shadow"
 				onClick={handleClick}
 				activeClassName=" bg-white shadow "
@@ -52,9 +64,10 @@ const ExpandableNavLink: React.FC<Props> = ({ title, Icon, children, to }) => {
 			</NavLink>
 			{!to && (
 				<div
-					className={`p-2 flex flex-col items-start justify-between ${
-						collapse ? " h-0 overflow-hidden " : " max-h-full "
-					}`}
+					className={`p-2 flex overflow-hidden flex-col items-start justify-between  transition-height duration-500 transform ease-in-out`}
+					style={{
+						height: collapse ? `${listSize! * 40}px` : "0px",
+					}}
 				>
 					{children?.map((value, index) => {
 						return (
