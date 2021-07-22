@@ -1,4 +1,5 @@
 import React from "react";
+import P from "../P";
 
 interface Props {
 	progressPercentage?: number;
@@ -46,7 +47,11 @@ const ProgressBar: React.FC<Props> = ({ progressPercentage, theme }) => {
 				style={{
 					width: `${progressPercentage}%`,
 				}}
-			></div>
+			>
+				<P className="w-10 text-white m-auto text-center text-xs font-bold">
+					{progressPercentage}%
+				</P>
+			</div>
 		</div>
 	);
 };
