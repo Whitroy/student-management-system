@@ -14,5 +14,5 @@ const Template: Story<ComponentProps<typeof Alert>> = (args) => (
 export const main = Template.bind({});
 
 main.args = {
-	children: "Lorem Ipsum is simply dummy text of the printing. ",
+	children: "pLorem Ipsum is simply dummy text of the printing. ",
 };
