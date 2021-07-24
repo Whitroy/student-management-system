@@ -9,7 +9,7 @@ interface Props {
 
 const RouteLink: React.FC<Props> = ({ className, to, children }) => {
 	return (
-		<Link className={" text-blue-500 " + className} to={to}>
+		<Link className={" text-primary-normal " + className} to={to}>
 			{children}
 		</Link>
 	);

@@ -27,7 +27,7 @@ const ExpandableNavLink: React.FC<Props> = ({
 	children?.forEach((value) => {
 		if (value.type !== LinkContent)
 			throw new Error(
-				`Link Component is expected as childreb but found ${value.type}`
+				`Link Component is expected as children but found ${value.type}`
 			);
 	});
 
@@ -43,7 +43,7 @@ const ExpandableNavLink: React.FC<Props> = ({
 		<div>
 			<NavLink
 				to={to && to !== "" ? to : "#"}
-				className="block hover:bg-gray-300 rounded-md hover:shadow"
+				className="block hover:bg-secondary-lightest rounded-md hover:shadow"
 				onClick={handleClick}
 				activeClassName=" bg-white shadow "
 			>
@@ -74,8 +74,8 @@ const ExpandableNavLink: React.FC<Props> = ({
 							<NavLink
 								to={value.props.to}
 								key={index}
-								className=" ml-1/5 p-1 text-sm font-medium my-1 hover:text-blue-500"
-								activeClassName="text-blue-500"
+								className=" ml-1/5 p-1 text-sm font-medium my-1 hover:text-primary-normal"
+								activeClassName="text-primary-normal"
 							>
 								&#8226; {value.props.title}
 							</NavLink>

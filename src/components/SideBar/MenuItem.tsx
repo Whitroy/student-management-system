@@ -13,7 +13,7 @@ const MenuItem: React.FC<Props> = ({ children }) => {
 	children?.forEach((value) => {
 		if (value.type !== LinkContent)
 			throw new Error(
-				`Link Component is expected as childreb but found ${value.type}`
+				`Link Component is expected as children but found ${value.type}`
 			);
 	});
 	return <></>;

@@ -79,7 +79,7 @@ const Login: React.FC<Props> = (props) => {
 						autoComplete="current-password"
 						Icon={HiLockClosed}
 						className="mt-5"
-						iconClassName="fill-blue-400"
+						iconClassName="fill-primary-400"
 						{...getFieldProps("password")}
 						touched={touched.password}
 						errors={errors.password}
@@ -104,7 +104,9 @@ const Login: React.FC<Props> = (props) => {
 					<div className="flex flex-col items-center mt-10 justify-between">
 						<div className="flex items-center justify-start space-x-2 flex-shrink-0">
 							<input type="checkbox" className="w-4 h-4" />
-							<span className=" text-gray-400 text-sm">Keep me logged in</span>
+							<span className=" text-secondary-light text-sm">
+								Keep me logged in
+							</span>
 						</div>
 						<RouteLink to="/forgot-password" className=" font-semibold mt-3">
 							Forgot Password?

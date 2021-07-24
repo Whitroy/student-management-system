@@ -38,8 +38,8 @@ const PopOver: React.FC<Props> = ({ title, sep, children }) => {
 					<div className="flex bg-white p-4 space-y-3 flex-col items-start justify-start rounded-lg shadow-lg min-w-max">
 						{children.map((item, index) => (
 							<div key={index} className="w-full">
-								<div className="hover:text-blue-500">{item}</div>
-								{sep && <hr className="my-1 w-full text-black" />}
+								<div className="hover:text-primary-normal">{item}</div>
+								{sep && <hr className="my-1 w-full text-secondary-lightest" />}
 							</div>
 						))}
 					</div>

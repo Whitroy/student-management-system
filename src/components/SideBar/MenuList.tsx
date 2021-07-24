@@ -25,7 +25,7 @@ const MenuList: React.FC<Props> = ({ children, className }) => {
 	return (
 		<div
 			className={
-				" w-52 border-r-4 border-gray-200 bg-gray-100 fixed z-10 top-0 bottom-0 left-0 pt-32 px-4 " +
+				" w-52 border-r-4 border-secondary-fine bg-secondary-finest fixed z-10 top-0 bottom-0 left-0 pt-32 px-4 " +
 				className
 			}
 		>

@@ -17,7 +17,10 @@ const NavBar: React.FC<Props> = (props) => {
 		<nav className=" bg-black py-2.5 px-8 flex items-center justify-between">
 			<div className="flex items-center justify-start space-x-2">
 				<img src={HeroIcon} alt="" className="w-7 h-7" />
-				<H1 className="text-gray-200 hidden md:inline-block" size="text-xl">
+				<H1
+					className="text-secondary-fine hidden md:inline-block"
+					size="text-xl"
+				>
 					SMS
 				</H1>
 			</div>

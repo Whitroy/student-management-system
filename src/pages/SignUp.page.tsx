@@ -76,7 +76,7 @@ const SignUp: React.FC<Props> = (props) => {
 						required
 						autoComplete="email"
 						Icon={SiMailDotRu}
-						iconClassName="fill-blue-400"
+						iconClassName="fill-primary-400"
 						className="mt-5"
 						{...getFieldProps("email")}
 						touched={touched.email}
@@ -90,14 +90,14 @@ const SignUp: React.FC<Props> = (props) => {
 						autoComplete="current-password"
 						Icon={HiLockClosed}
 						className="mt-5"
-						iconClassName="fill-blue-400"
+						iconClassName="fill-primary-400"
 						{...getFieldProps("password")}
 						touched={touched.password}
 						errors={errors.password}
 					/>
 					<div className="flex items-center justify-start space-x-2 mt-8">
 						<input type="checkbox" className="w-4 h-4" />
-						<span className=" text-gray-400 text-sm">
+						<span className=" text-secondary-light text-sm">
 							I agree to the{" "}
 							<RouteLink to="/terms-and-conditions">
 								terms and conditions

@@ -30,7 +30,7 @@ const Avatar: React.FC<Props> = ({
 				<div
 					className={`w-4 h-4 rounded-full border-2 absolute ${
 						appearance === "rounded" ? "bottom-0 right-1" : "-bottom-1 -right-1"
-					} border-white ${online ? "bg-green-600" : "bg-gray-100"}`}
+					} border-white ${online ? "bg-success-dark" : "bg-secondary-finest"}`}
 				/>
 			)}
 		</div>

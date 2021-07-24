@@ -28,7 +28,7 @@ main.args = {
 	Icon: HiLockClosed,
 	errors: "Invalid !",
 	touched: false,
-	iconClassName: "fill-blue-400",
+	iconClassName: "fill-primary-400",
 	placeholder: "Email Address",
 	id: "email",
 	type: "text",

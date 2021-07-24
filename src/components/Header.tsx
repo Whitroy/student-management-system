@@ -10,9 +10,9 @@ interface Props {
 
 const Header: React.FC<Props> = ({ handleMenuClick }) => {
 	return (
-		<header className=" p-2 px-8 bg-gray-50 shadow-md flex items-center justify-between">
+		<header className=" p-2 px-8 bg-secondary-finest shadow-md flex items-center justify-between">
 			<div className="flex items-center justify-start">
-				<div className="hover:bg-gray-200 p-1 rounded-full">
+				<div className="hover:bg-secondary-fine p-1 rounded-full">
 					<HiOutlineMenu
 						className="w-5 h-5"
 						onClick={handleMenuClick}

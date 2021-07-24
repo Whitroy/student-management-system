@@ -23,7 +23,7 @@ const DropDown: React.FC<Props> = ({ title, children }) => {
 			<Menu as={Fragment}>
 				{({ open }) => (
 					<>
-						<Menu.Button className="border border-gray-400 rounded-md w-24 py-1.5 text-left px-3 bg-white text-md flex justify-between items-center ">
+						<Menu.Button className="border border-secondary-light rounded-md w-24 py-1.5 text-left px-3 bg-white text-md flex justify-between items-center ">
 							<H2>{currentActive}</H2>
 
 							<HiChevronUp
@@ -50,7 +50,7 @@ const DropDown: React.FC<Props> = ({ title, children }) => {
 												<Link
 													to={item.props.to}
 													className={`${
-														active && "text-blue-500 bg-gray-50"
+														active && "text-primary-normal bg-secondary-finest"
 													} px-2 py-1.5 `}
 													onPointerEnter={() => {
 														setCurrentActive(item.props.name);

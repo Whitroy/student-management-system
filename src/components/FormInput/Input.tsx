@@ -21,7 +21,7 @@ const Input: React.FC<Props> = ({
 		<div className={" w-full h-14 " + className}>
 			<div className="flex items-center space-x-2">
 				<Icon
-					className={`text-blue-500 w-6 h-6 fill-blue-200 ${iconClassName}`}
+					className={`text-primary-normal w-6 h-6 fill-primary-200 ${iconClassName}`}
 				/>
 				<div className="w-full">
 					{rest.id && rest.placeholder && (
@@ -32,8 +32,12 @@ const Input: React.FC<Props> = ({
 					<input {...rest} className=" focus:outline-none w-full" />
 				</div>
 			</div>
-			<hr className=" text-black mt-3" />
-			{touched && <div className="text-sm text-red-600 mt-1">{errors}</div>}
+			<hr
+				className={`${
+					touched && errors ? "text-danger-dark" : "text-secondary-dark"
+				}  mt-3`}
+			/>
+			{touched && <div className="text-sm text-danger-dark mt-1">{errors}</div>}
 		</div>
 	);
 };
