@@ -17,10 +17,42 @@ const Alert: React.FC<Props> = ({
 }) => {
 	let appearanceClasses = "";
 
-	if (appearance === "outline") {
-		appearanceClasses = `border border-${theme}-normal text-${theme}-normal hover:text-white hover:bg-${theme}-light hover:border-none shadow-${theme}`;
-	} else {
-		appearanceClasses = `bg-${theme}-light text-white hover:bg-${theme}-normal shadow-${theme} `;
+	switch (theme) {
+		case "primary":
+			if (appearance === "outline") {
+				appearanceClasses = `border border-primary-normal text-primary-normal hover:text-white hover:bg-primary-light hover:border-none shadow-primary`;
+			} else {
+				appearanceClasses = `bg-primary-light text-white hover:bg-primary-normal shadow-primary `;
+			}
+			break;
+		case "secondary":
+			if (appearance === "outline") {
+				appearanceClasses = `border border-secondary-normal text-secondary-normal hover:text-white hover:bg-secondary-light hover:border-none shadow-secondary`;
+			} else {
+				appearanceClasses = `bg-secondary-light text-white hover:bg-secondary-normal shadow-secondary `;
+			}
+			break;
+		case "danger":
+			if (appearance === "outline") {
+				appearanceClasses = `border border-danger-normal text-danger-normal hover:text-white hover:bg-danger-light hover:border-none shadow-danger`;
+			} else {
+				appearanceClasses = `bg-danger-light text-white hover:bg-danger-normal shadow-danger `;
+			}
+			break;
+		case "success":
+			if (appearance === "outline") {
+				appearanceClasses = `border border-success-normal text-success-normal hover:text-white hover:bg-success-light hover:border-none shadow-success`;
+			} else {
+				appearanceClasses = `bg-success-light text-white hover:bg-success-normal shadow-success `;
+			}
+			break;
+		case "warning":
+			if (appearance === "outline") {
+				appearanceClasses = `border border-warning-normal text-warning-normal hover:text-white hover:bg-warning-light hover:border-none shadow-warning`;
+			} else {
+				appearanceClasses = `bg-warning-light text-white hover:bg-warning-normal shadow-warning `;
+			}
+			break;
 	}
 
 	return (
