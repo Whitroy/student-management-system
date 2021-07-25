@@ -41,6 +41,7 @@ module.exports = {
 			},
 			white: colors.white,
 			black: colors.black,
+			transparent: "#1C00ff00",
 		},
 
 		fill: {

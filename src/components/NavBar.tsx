@@ -9,6 +9,7 @@ import { HiLockClosed } from "react-icons/hi";
 import { GoSignOut } from "react-icons/go";
 import { FaUserCircle } from "react-icons/fa";
 import { IoIosNotifications, IoIosMail } from "react-icons/io";
+import { logOut } from "../API/Auth.api";
 
 interface Props {}
 
@@ -85,7 +86,16 @@ const NavBar: React.FC<Props> = (props) => {
 					</PopOverItem>
 					<PopOverItem>
 						<GoSignOut className="w-4 h-4" />
-						<Link to="/signout">Sign Out</Link>
+						<Link
+							to=""
+							onClick={() => {
+								logOut();
+								console.log("LogOut Successfully!");
+								window.location.href = "/login";
+							}}
+						>
+							Sign Out
+						</Link>
 					</PopOverItem>
 				</PopOver>
 			</div>

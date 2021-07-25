@@ -12,6 +12,7 @@ import { FaSpinner } from "react-icons/fa";
 import { useFormik } from "formik";
 import * as yup from "yup";
 import ToggleButton from "../components/ToggleButton";
+import { login } from "../API/Auth.api";
 
 interface Props {}
 
@@ -25,6 +26,7 @@ const Login: React.FC<Props> = (props) => {
 		setSubmitting,
 		isValid,
 		errors,
+		values,
 		getFieldProps,
 	} = useFormik({
 		initialValues: {
@@ -42,10 +44,10 @@ const Login: React.FC<Props> = (props) => {
 
 		onSubmit: () => {
 			console.log("Submitting!");
-			setTimeout(() => {
+			login(values).then(() => {
 				setSubmitting(false);
 				history.push("/dashboard");
-			}, 5000);
+			});
 		},
 	});
 

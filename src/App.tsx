@@ -6,12 +6,18 @@ import NotFoundPage from "./pages/NotFound.page";
 
 interface Props {}
 
+const { LOGIN_TOKEN_KEY } = require("./API/Config.json");
+
 const App: React.FC<Props> = (props) => {
 	return (
 		<div>
 			<BrowserRouter>
 				<Switch>
-					<Redirect to="/login" from="/" exact />
+					{localStorage.getItem(LOGIN_TOKEN_KEY) ? (
+						<Redirect to="/dashboard" from="/" exact />
+					) : (
+						<Redirect to="/login" from="/" exact />
+					)}
 					<Route path={["/login", "/signup"]} exact>
 						<AuthPage />
 					</Route>
