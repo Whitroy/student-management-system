@@ -1,4 +1,5 @@
 import axios from "axios";
+import Group from "../models/Group.model";
 
 const { BASE_URL } = require('./Config.json');
 
@@ -13,16 +14,13 @@ interface GroupResponse{
     data: Group[];
 }
 
-export interface Group {
-	id: number;
-	name: string;
-	description: string;
-	group_image_url: string;
-}
 
 export const fetchGroup = async (data?: GroupRequest) => {
     
     const url = BASE_URL + "/groups";
-    const request = await axios.get<GroupResponse>(url, { params: data?data : {status:"all-groups"} });
-    return request.data;
+    const response = await axios.get<GroupResponse>(url, {
+        params: data ? data : { status: "all-groups" },
+        // headers: { Authorization: localStorage.getItem("login_token") }
+    });
+    return response.data.data;
 }

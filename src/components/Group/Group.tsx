@@ -1,11 +1,12 @@
 import React from "react";
-import { Group as GroupInterface } from "../../API/Fetch.api";
+import GroupModel from "../../models/Group.model";
 import H1 from "../H1";
 import P from "../P";
 
-interface Props extends GroupInterface {
+interface Props extends GroupModel {
 	index?: number;
 	className?: string;
+	showDefault?: boolean;
 }
 
 const Group: React.FC<Props> = ({
@@ -15,33 +16,64 @@ const Group: React.FC<Props> = ({
 	group_image_url: url,
 	index,
 	className,
+	showDefault,
 }) => {
 	return (
 		<div
 			className={`w-full px-4 py-6 shadow-sm flex items-center justify-start space-x-6 ${
 				index! & 1 ? " bg-secondary-finest" : " bg-white"
-			} ${className}`}
+			} ${className} ${showDefault ? "animate-pulse" : ""} `}
 		>
 			<img
 				src={
-					url
+					showDefault
+						? ""
+						: url
 						? url
 						: "https://sensilab.monash.edu/new-sensilab/wp-content/uploads/2017/08/4949794-random-image.jpg"
 				}
 				alt=""
-				className="shadow w-10 h-10 rounded-full object-cover"
+				className={`shadow w-10 h-10 rounded-full object-cover ${
+					showDefault ? "animate-pulse" : ""
+				}`}
 			/>
 			<div className="w-full">
 				<div className="flex items-center justify-between">
-					<H1 size="text-xl" className="text-primary-normal">
-						{name}
+					<H1
+						size="text-xl"
+						className={`text-primary-normal ${
+							showDefault
+								? `animate-pulse h-7  rounded-sm w-24 ${
+										index! & 1 ? "bg-white" : "bg-secondary-finest"
+								  }`
+								: ""
+						}`}
+					>
+						{!showDefault && name}
 					</H1>
-					<H1 size="text-sm" className=" text-secondary-dark">
-						{id}
+					<H1
+						size="text-sm"
+						className={`text-secondary-dark${
+							showDefault
+								? `animate-pulse h-7  rounded-sm w-4 ${
+										index! & 1 ? "bg-white" : "bg-secondary-finest"
+								  }`
+								: ""
+						}`}
+					>
+						{!showDefault && id}
 					</H1>
 				</div>
-				<P className=" font-medium text-sm mt-2 text-secondary-dark">
-					{description}
+				<P
+					className={` font-medium text-sm mt-2 text-secondary-dark${
+						showDefault
+							? `animate-pulse h-7  rounded-sm w-full ${
+									index! & 1 ? "bg-white" : "bg-secondary-finest"
+							  }`
+							: ""
+					}`}
+				>
+					{!showDefault && description}
 				</P>
 			</div>
 		</div>
@@ -51,6 +83,7 @@ const Group: React.FC<Props> = ({
 Group.defaultProps = {
 	index: 0,
 	className: "",
+	showDefault: false,
 };
 
 export default React.memo(Group);

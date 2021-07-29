@@ -23,16 +23,20 @@
 	</head>
 	<body>
 		<noscript>You need to enable JavaScript to run this app.</noscript>
-		<div id="root"></div>
-		<!--
-      This HTML file is a template.
-      If you open it directly in the browser, you will see an empty page.
-
-      You can add webfonts, meta tags, or analytics to this file.
-      The build step will place the bundled scripts into the <body> tag.
-
-      To begin the development, run `npm start` or `yarn start`.
-      To create a production bundle, use `npm run build` or `yarn build`.
-    -->
+		<div id="root">
+			<div className="w-screen h-screen relative">
+				<div
+					className="absolute w-48 border-2 bg-secondary-finest rounded-full h-5 top-1/2 left-2/5"
+				>
+					<div
+						className="w-20 h-4 rounded-full bg-success-lightest animate-moveX"
+					>
+						<p className="text-xs w-12 m-auto text-secondary-dark">
+							Loading...
+						</p>
+					</div>
+				</div>
+			</div>
+		</div>
 	</body>
 </html>

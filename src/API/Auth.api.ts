@@ -1,26 +1,7 @@
 import axios from "axios";
+import User from "../models/User.model";
 
 const { BASE_URL, LOGIN_TOKEN_KEY } = require("./Config.json");
-
-axios.interceptors.request.use((config) => {
-
-    const token = localStorage.getItem(LOGIN_TOKEN_KEY);
-    
-    if (!token) {
-        return config;
-    }
-
-    return { ...config, headers: { ...config.headers, Authorization: token } };
-});
-
-axios.interceptors.response.use(undefined, (error) => {
-    if (error.response.data.code === 9101) {
-        localStorage.removeItem(LOGIN_TOKEN_KEY);
-        window.location.href= '/login';
-    }
-
-    return Promise.reject(error);
-});
 
 interface LoginData{
     email: string;
@@ -35,15 +16,6 @@ interface LoginResponse{
     user: User;
 }
 
-interface User{
-    first_name: string;
-    middle_name: string;
-    last_name: string;
-    role: "staff" | "admin";
-    hometown: "Ghaziabad";
-    phone_number: string;
-}
-
 export const login = async (data: LoginData) => {
 
     const url = BASE_URL + "/login";
@@ -52,7 +24,7 @@ export const login = async (data: LoginData) => {
 
     localStorage.setItem(LOGIN_TOKEN_KEY, request.data.token);
 
-    return request.data;
+    return request.data.user;
 }
 
 

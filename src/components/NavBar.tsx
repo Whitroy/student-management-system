@@ -9,7 +9,7 @@ import { HiLockClosed } from "react-icons/hi";
 import { GoSignOut } from "react-icons/go";
 import { FaUserCircle } from "react-icons/fa";
 import { IoIosNotifications, IoIosMail } from "react-icons/io";
-import { logOut } from "../API/Auth.api";
+import { logOut } from "../api/Auth.api";
 
 interface Props {}
 

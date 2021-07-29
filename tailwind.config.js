@@ -73,6 +73,41 @@ module.exports = {
 				height: "height",
 				width: "width",
 			},
+
+			inset: {
+				"2/5": "40%",
+			},
+
+			height: {
+				4.5: "1.125rem",
+			},
+
+			margin: {
+				0.25: "0.0625rem",
+			},
+
+			animation: {
+				moveX: "moveX 3s linear infinite",
+			},
+			keyframes: {
+				moveX: {
+					"0%": {
+						transform: "translateX(0%)",
+					},
+					"25%": {
+						transform: "translateX(70%)",
+					},
+					"50%": {
+						transform: "translateX(140%)",
+					},
+					"75%": {
+						transform: "translateX(70%)",
+					},
+					"100%": {
+						transform: "translateX(0%)",
+					},
+				},
+			},
 		},
 	},
 	variants: {

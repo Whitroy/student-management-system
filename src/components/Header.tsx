@@ -1,5 +1,6 @@
-import React from "react";
+import React, { useContext } from "react";
 import { HiOutlineMenu } from "react-icons/hi";
+import AppContext from "../context/App.context";
 import DropDown from "./DropDown/DropDown";
 import Item from "./DropDown/Item";
 import H2 from "./H2";
@@ -9,6 +10,7 @@ interface Props {
 }
 
 const Header: React.FC<Props> = ({ handleMenuClick }) => {
+	const { user } = useContext(AppContext);
 	return (
 		<header className=" p-2 px-8 bg-secondary-finest shadow-md flex items-center justify-between">
 			<div className="flex items-center justify-start">
@@ -19,7 +21,10 @@ const Header: React.FC<Props> = ({ handleMenuClick }) => {
 						cursor="pointer"
 					/>
 				</div>
-				<H2 className=" ml-3">Dashboard / Analytics</H2>
+				<H2 className=" ml-3 font-semibold">
+					Welcome!{" "}
+					<span className="text-primary-dark"> {user!.first_name} </span>
+				</H2>
 			</div>
 			<DropDown title="Settings">
 				<Item to="/dashboard/setting" name="Settings" />
