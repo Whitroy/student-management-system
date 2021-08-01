@@ -19,7 +19,7 @@ const SideBar: React.FC<Props> = ({ show, onClose }) => {
 				}`}
 			>
 				<MenuItem title="Dashboard" Icon={FaHome}>
-					<LinkContent to="/sales" title="Sales" />
+					<LinkContent to="/dashboard/groups" title="Groups" />
 					<LinkContent to="/analytics" title="Analytics" />
 				</MenuItem>
 				<MenuItem title="Apps" Icon={IoIosApps}>

@@ -1,6 +1,6 @@
 import { Meta, Story } from "@storybook/react";
 import { ComponentProps } from "react";
-import Input from "./Input";
+import Input from "./PublicFormInput";
 import { FaSpinner } from "react-icons/fa";
 import { HiLockClosed } from "react-icons/hi";
 

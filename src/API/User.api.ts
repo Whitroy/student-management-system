@@ -8,6 +8,7 @@ interface MeRespone{
 }
 export const me = async () => {
     const url = BASE_URL + "/me";
-    const response = await axios.get<MeRespone>(url);
+    const response = await axios.get<MeRespone>(url,{
+        headers: { Authorization: localStorage.getItem("login_token") }});
     return response.data.data;
 }

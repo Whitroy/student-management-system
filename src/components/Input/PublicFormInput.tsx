@@ -3,7 +3,7 @@ import { IconType } from "react-icons";
 
 interface Props extends InputHTMLAttributes<HTMLInputElement> {
 	className?: string;
-	Icon: IconType;
+	Icon?: IconType;
 	errors?: string;
 	touched?: boolean;
 	iconClassName?: string;
@@ -20,9 +20,11 @@ const Input: React.FC<Props> = ({
 	return (
 		<div className={" w-full h-14 " + className}>
 			<div className="flex items-center space-x-2">
-				<Icon
-					className={`text-primary-normal w-6 h-6 fill-primary-200 ${iconClassName}`}
-				/>
+				{Icon && (
+					<Icon
+						className={`text-primary-normal w-6 h-6 fill-primary-200 ${iconClassName}`}
+					/>
+				)}
 				<div className="w-full">
 					{rest.id && rest.placeholder && (
 						<label htmlFor={rest.id} className="sr-only">

@@ -16,7 +16,7 @@ const { LOGIN_TOKEN_KEY } = require("./api/Config.json");
 const App: React.FC<Props> = (props) => {
 	const [user, setUser] = useState<User>();
 	const token = localStorage.getItem(LOGIN_TOKEN_KEY);
-	console.log(token);
+
 	useEffect(() => {
 		if (!token) return;
 		me().then((user) => {
@@ -50,7 +50,9 @@ const App: React.FC<Props> = (props) => {
 						<Route
 							path={[
 								"/dashboard",
+								"/dashboard/groups",
 								"/recordings/batch/:batchNumber/lecture/:lectureNumber",
+								"/dashboard/profile",
 							]}
 							exact
 						>

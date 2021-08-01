@@ -20,7 +20,7 @@ export const fetchGroup = async (data?: GroupRequest) => {
     const url = BASE_URL + "/groups";
     const response = await axios.get<GroupResponse>(url, {
         params: data ? data : { status: "all-groups" },
-        // headers: { Authorization: localStorage.getItem("login_token") }
+        headers: { Authorization: localStorage.getItem("login_token") }
     });
     return response.data.data;
 }

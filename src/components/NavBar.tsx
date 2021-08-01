@@ -74,7 +74,7 @@ const NavBar: React.FC<Props> = (props) => {
 				>
 					<PopOverItem>
 						<FiUser className="w-4 h-4 " />
-						<Link to="/profile">Profile</Link>
+						<Link to="/dashboard/profile">Profile</Link>
 					</PopOverItem>
 					<PopOverItem>
 						<FiInbox className="w-4 h-4 " />
