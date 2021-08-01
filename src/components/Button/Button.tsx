@@ -1,7 +1,7 @@
 import React from "react";
 import { ButtonHTMLAttributes } from "react";
 import { IconType } from "react-icons/lib";
-import P from "../P";
+import P from "../Basic/P";
 
 interface Props extends ButtonHTMLAttributes<HTMLButtonElement> {
 	className?: string;

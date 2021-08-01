@@ -1,7 +1,7 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
 import { HiChevronUp } from "react-icons/hi";
-import H2 from "../H2";
+import H2 from "../Basic/H2";
 import LinkContent from "./LinkContent";
 import { IconType } from "react-icons";
 

@@ -1,7 +1,7 @@
 import React from "react";
 import GroupModel from "../../models/Group.model";
-import H1 from "../H1";
-import P from "../P";
+import H1 from "../Basic/H1";
+import P from "../Basic/P";
 
 interface Props extends GroupModel {
 	index?: number;

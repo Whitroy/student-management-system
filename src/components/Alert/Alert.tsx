@@ -1,5 +1,5 @@
 import React from "react";
-import P from "../P";
+import P from "../Basic/P";
 import { HiX } from "react-icons/hi";
 
 interface Props {

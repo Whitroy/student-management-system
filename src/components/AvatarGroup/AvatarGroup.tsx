@@ -1,6 +1,6 @@
 import React, { ReactElement } from "react";
 import Avatar from "../Avatar/Avatar";
-import P from "../P";
+import P from "../Basic/P";
 
 interface Props {
 	children: ReactElement[];

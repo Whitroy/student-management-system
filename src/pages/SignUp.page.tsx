@@ -1,6 +1,6 @@
 import React, { useState } from "react";
-import H1 from "../components/H1";
-import P from "../components/P";
+import H1 from "../components/Basic/H1";
+import P from "../components/Basic/P";
 import RouteLink from "../components/RouteLink";
 import { useFormik } from "formik";
 import { BsLock } from "react-icons/bs";

@@ -1,5 +1,5 @@
 import React from "react";
-import H1 from "./H1";
+import H1 from "./Basic/H1";
 import HeroIcon from "../Img/HeroImg.webp";
 import PopOver from "./PopOver/PopOver";
 import PopOverItem from "./PopOver/PopOverItem";

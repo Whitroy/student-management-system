@@ -1,5 +1,5 @@
 import React from "react";
-import P from "../P";
+import P from "../Basic/P";
 
 interface Props {
 	progress?: number;

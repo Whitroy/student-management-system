@@ -1,9 +1,9 @@
 import React from "react";
 import Avatar from "../components/Avatar/Avatar";
-import H1 from "../components/H1";
+import H1 from "../components/Basic/H1";
 import Input from "../components/Input/PrivateFormInput";
 import { FaCloudUploadAlt } from "react-icons/fa";
-import P from "../components/P";
+import P from "../components/Basic/P";
 import Button from "../components/Button/Button";
 import { BiReset } from "react-icons/bi";
 import { VscSaveAs } from "react-icons/vsc";

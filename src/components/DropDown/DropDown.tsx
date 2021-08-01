@@ -1,7 +1,7 @@
 import { Menu, Transition } from "@headlessui/react";
 import React, { Fragment, useState } from "react";
 import { Link } from "react-router-dom";
-import H2 from "../H2";
+import H2 from "../Basic/H2";
 import Item from "./Item";
 import { HiChevronUp } from "react-icons/hi";
 

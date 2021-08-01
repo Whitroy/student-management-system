@@ -3,7 +3,7 @@ import { HiOutlineMenu } from "react-icons/hi";
 import AppContext from "../context/App.context";
 import DropDown from "./DropDown/DropDown";
 import Item from "./DropDown/Item";
-import H2 from "./H2";
+import H2 from "./Basic/H2";
 
 interface Props {
 	handleMenuClick: () => void;
