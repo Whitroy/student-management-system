@@ -9,10 +9,13 @@ import { BiReset } from "react-icons/bi";
 import { VscSaveAs } from "react-icons/vsc";
 import { useFormik } from "formik";
 import * as yup from "yup";
+import { useAppSelector } from "../store/store";
 
 interface Props {}
 
 const ProfilePage: React.FC<Props> = (props) => {
+	const user = useAppSelector((state) => state.me);
+	const sideBarState = useAppSelector((state) => state.isSideBarOpen);
 	const {
 		touched,
 		errors,
@@ -21,12 +24,12 @@ const ProfilePage: React.FC<Props> = (props) => {
 		getFieldProps,
 	} = useFormik({
 		initialValues: {
-			firstName: "",
-			middleName: "",
-			lastName: "",
-			Email: "",
+			firstName: user!.first_name,
+			profilePic: user!.profile_pic_url,
+			middleName: user!.middle_name,
+			lastName: user!.last_name,
 			DOB: "",
-			mobileNo: "",
+			mobileNo: user!.phone_number,
 			bio: "",
 		},
 		validationSchema: yup.object().shape({
@@ -60,8 +63,12 @@ const ProfilePage: React.FC<Props> = (props) => {
 						GENERAL INFORMATION
 					</H1>
 					<div className="flex md:flex-row flex-col mt-4 md:space-x-8 space-y-4 md:space-y-0 justify-start md:items-start items-center">
-						<div className="mt-8">
-							<Avatar size="extraLarge" showOnline={false} />
+						<div className="mt-8 min-w-max">
+							<Avatar
+								src={getFieldProps("profilePic").value}
+								size="extraLarge"
+								showOnline={false}
+							/>
 							<label className=" cursor-pointer hover:text-primary-normal flex items-center justify-start text-secondary-dark">
 								<FaCloudUploadAlt className="flex-shrink-0 w-6 h-6 mt-2" />
 								<P className="text-xs flex-shrink-0  ml-2 font-bold mt-2">
@@ -103,6 +110,8 @@ const ProfilePage: React.FC<Props> = (props) => {
 									errors={errors.lastName}
 									touched={touched.lastName}
 								/>
+							</div>
+							<div className="flex items-center md:flex-row flex-col justify-start md:space-x-6">
 								<Input
 									id="DOB"
 									placeholder="D.O.B"
@@ -112,18 +121,6 @@ const ProfilePage: React.FC<Props> = (props) => {
 									{...getFieldProps("DOB")}
 									errors={errors.DOB}
 									touched={touched.DOB}
-								/>
-							</div>
-							<div className="flex items-center md:flex-row flex-col justify-start md:space-x-6">
-								<Input
-									id="email"
-									placeholder="Email Address"
-									type="email"
-									mandatory={true}
-									required
-									{...getFieldProps("Email")}
-									errors={errors.Email}
-									touched={touched.Email}
 								/>
 								<Input
 									id="mobileNumber"
@@ -159,7 +156,11 @@ const ProfilePage: React.FC<Props> = (props) => {
 						/>
 					</div>
 				</div>
-				<div className="fixed bottom-0 right-6 left-6 bg-secondary-dark p-2 rounded-md shadow border flex justify-between items-center ">
+				<div
+					className={`fixed bottom-0 transform duration-500 ease-in-out ${
+						sideBarState ? " md:left-54 left-6" : "left-6"
+					} right-6 bg-secondary-dark p-2 rounded-md shadow border flex justify-between items-center `}
+				>
 					<Button type="reset" theme="danger" Icon={BiReset}>
 						Reset all
 					</Button>

@@ -1,17 +1,21 @@
 import React, { useEffect, useState } from "react";
+import { useDispatch } from "react-redux";
 import { fetchGroup } from "../api/Group.api";
 import Group from "../components/Group/Group";
 import SearchBar from "../components/SearchBar/SearchBar";
-import GroupModel from "../models/Group.model";
+import { useAppSelector } from "../store/store";
 
 interface Props {}
 
 const GroupPage: React.FC<Props> = (props) => {
 	const [searchContent, setSearchContent] = useState("");
-	const [groups, setGroups] = useState<GroupModel[]>([]);
+
+	const groups = useAppSelector((state) => state.groups);
+
 	const [showDefault, setShowDefault] = useState(true);
 	const defaultUI = [1, 2, 3, 4];
 
+	const dispatch = useDispatch();
 	useEffect(() => {
 		if (searchContent.length < 3 && searchContent.length > 0) return;
 
@@ -20,11 +24,11 @@ const GroupPage: React.FC<Props> = (props) => {
 		fetchGroup({ status: "all-groups", query: searchContent })
 			.then((response) => {
 				console.log("Group fetched!");
-				setGroups(response);
+				dispatch({ type: "group/set", payload: response });
 				setShowDefault(false);
 			})
 			.catch((error) => console.log(error.message));
-	}, [searchContent]);
+	}, [searchContent]); // eslint-disable-line react-hooks/exhaustive-deps
 
 	const handleSearch = (event: React.ChangeEvent<HTMLInputElement>) => {
 		setSearchContent(event.target.value);

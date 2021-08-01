@@ -1,23 +1,26 @@
-import React, { useContext } from "react";
+import React from "react";
 import { HiOutlineMenu } from "react-icons/hi";
-import AppContext from "../context/App.context";
 import DropDown from "./DropDown/DropDown";
 import Item from "./DropDown/Item";
 import H2 from "./Basic/H2";
+import { useAppSelector } from "../store/store";
+import { useDispatch } from "react-redux";
 
-interface Props {
-	handleMenuClick: () => void;
-}
+interface Props {}
 
-const Header: React.FC<Props> = ({ handleMenuClick }) => {
-	const { user } = useContext(AppContext);
+const Header: React.FC<Props> = () => {
+	const user = useAppSelector((state) => state.me);
+	const dispatch = useDispatch();
+	const handleClick = () => {
+		dispatch({ type: "sidebar" });
+	};
 	return (
 		<header className=" p-2 px-8 bg-secondary-finest shadow-md flex items-center justify-between">
 			<div className="flex items-center justify-start">
 				<div className="hover:bg-secondary-fine p-1 rounded-full">
 					<HiOutlineMenu
 						className="w-5 h-5"
-						onClick={handleMenuClick}
+						onClick={handleClick}
 						cursor="pointer"
 					/>
 				</div>

@@ -47,7 +47,9 @@ const Avatar: React.FC<Props> = ({
 			<img
 				alt="Avatar"
 				src={src}
-				className="object-cover rounded-full border-2 border-white "
+				className={`w-full h-full ${
+					appearance === "rounded" ? "rounded-full" : "rounded-md"
+				} object-cover`}
 			/>
 			{showOnline && (
 				<div

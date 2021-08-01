@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import { Route, Switch } from "react-router-dom";
 import Header from "../components/Header";
 import NavBar from "../components/NavBar";
@@ -9,22 +9,16 @@ import RecordingsPage from "./Recordings.page";
 interface Props {}
 
 const MainApp: React.FC<Props> = (props) => {
-	const [menuOpen, setMenuOpen] = useState(false);
-
-	const handleMenuClick = () => {
-		setMenuOpen((open) => !open);
-	};
-
 	return (
 		<>
 			<div className="w-full fixed z-30">
 				<NavBar />
-				<Header handleMenuClick={handleMenuClick} />
+				<Header />
 			</div>
-			<SideBar show={menuOpen} onClose={setMenuOpen} />
+			<SideBar />
 			<Switch>
 				<Route path="/dashboard">
-					<DashboardPage grow={menuOpen} />
+					<DashboardPage />
 				</Route>
 				<Route path="/recordings/batch/:batchNumber/lecture/:lectureNumber">
 					<RecordingsPage />

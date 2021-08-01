@@ -1,20 +1,22 @@
 import React from "react";
 import { Redirect, Route, Switch } from "react-router-dom";
+import { useAppSelector } from "../store/store";
 
 import GroupPage from "./Group.page";
 import ProfilePage from "./Profile.page";
 
-interface Props {
-	grow: boolean;
-}
+interface Props {}
 
-const Dashboard: React.FC<Props> = ({ grow }) => {
+const Dashboard: React.FC<Props> = () => {
+	const sideBarState = useAppSelector((state) => state.isSideBarOpen);
+
 	return (
 		<div className="flex">
 			<div
-				className={` bg-secondary-finest transition-width duration-500 ease-in-out ${
-					grow ? "w-68" : "w-0"
+				className={`hidden md:block bg-secondary-finest transition-width duration-500 ease-in-out ${
+					sideBarState ? "w-68" : "w-0"
 				}`}
+				style={{ scrollbarWidth: "none" }}
 			/>
 			<div className="bg-secondary-finest w-full pt-28 px-2">
 				<Switch>

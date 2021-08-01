@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useState } from "react";
 import { useHistory } from "react-router-dom";
 import Input from "../components/Input/PublicFormInput";
 import { FiUser } from "react-icons/fi";
@@ -13,7 +13,7 @@ import { useFormik } from "formik";
 import * as yup from "yup";
 import ToggleButton from "../components/ToggleButton";
 import { login } from "../api/Auth.api";
-import AppContext from "../context/App.context";
+import { useDispatch } from "react-redux";
 
 interface Props {}
 
@@ -21,7 +21,7 @@ const Login: React.FC<Props> = (props) => {
 	const history = useHistory();
 	const [showPassword, setShowPassword] = useState(false);
 
-	const { setUser } = useContext(AppContext);
+	const dispatch = useDispatch();
 
 	const {
 		handleSubmit,
@@ -50,7 +50,7 @@ const Login: React.FC<Props> = (props) => {
 			console.log("Submitting!");
 			login(values).then((user) => {
 				setSubmitting(false);
-				setUser(user);
+				dispatch({ type: "me/login", payload: user });
 				history.push("/dashboard");
 			});
 		},

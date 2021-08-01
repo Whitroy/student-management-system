@@ -76,6 +76,7 @@ module.exports = {
 
 			inset: {
 				"2/5": "40%",
+				54: "13.5rem",
 			},
 
 			height: {

@@ -1,21 +1,20 @@
-import React, { Dispatch } from "react";
+import React from "react";
 import MenuItem from "./MenuItem";
 import { FaHome } from "react-icons/fa";
 import LinkContent from "./LinkContent";
 import { IoIosApps, IoMdMap } from "react-icons/io";
 import MenuList from "./MenuList";
+import { useAppSelector } from "../../store/store";
 
-interface Props {
-	show: boolean;
-	onClose: Dispatch<React.SetStateAction<boolean>>;
-}
+interface Props {}
 
-const SideBar: React.FC<Props> = ({ show, onClose }) => {
+const SideBar: React.FC<Props> = () => {
+	const sideBarState = useAppSelector((state) => state.isSideBarOpen);
 	return (
 		<>
 			<MenuList
-				className={`transform transition-transform duration-300 ease-in-out ${
-					show ? "translate-x-0 not-sr-only" : "-translate-x-full"
+				className={` transform transition-transform duration-300 ease-in-out ${
+					sideBarState ? "translate-x-0 not-sr-only" : "-translate-x-full"
 				}`}
 			>
 				<MenuItem title="Dashboard" Icon={FaHome}>

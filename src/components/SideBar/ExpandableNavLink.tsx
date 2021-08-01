@@ -13,6 +13,7 @@ interface Props {
 	collapse: boolean;
 	index: number;
 	handleCollapse: (index: number) => void;
+	className?: string;
 }
 
 const ExpandableNavLink: React.FC<Props> = ({
@@ -43,7 +44,9 @@ const ExpandableNavLink: React.FC<Props> = ({
 		<div>
 			<NavLink
 				to={to && to !== "" ? to : "#"}
-				className="block hover:bg-secondary-lightest rounded-md hover:shadow"
+				className={`block hover:bg-secondary-lightest rounded-md hover:shadow ${
+					to ? "my-2" : ""
+				}`}
 				onClick={handleClick}
 				activeClassName=" bg-white shadow "
 			>
@@ -87,6 +90,8 @@ const ExpandableNavLink: React.FC<Props> = ({
 	);
 };
 
-ExpandableNavLink.defaultProps = {};
+ExpandableNavLink.defaultProps = {
+	className: "",
+};
 
 export default React.memo(ExpandableNavLink);
