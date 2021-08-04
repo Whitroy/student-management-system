@@ -22,5 +22,5 @@
   },
   "include": [
     "src"
-  ]
+, "typing.d.ts"  ]
 }

@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { useCallback } from "react";
 import { useDispatch } from "react-redux";
 import { fetchGroup } from "../api/Group.api";
 import Group from "../components/Group/Group";
@@ -8,38 +9,51 @@ import { useAppSelector } from "../store/store";
 interface Props {}
 
 const GroupPage: React.FC<Props> = (props) => {
-	const [searchContent, setSearchContent] = useState("");
+	const groups = useAppSelector((state) => {
+		const currentGroupIds = state.groupCollections[state.queryString] || [];
+		const currentGroup = currentGroupIds.map(
+			(groupId) => state.allGroups[groupId]
+		);
+		return currentGroup;
+	});
+	const query = useAppSelector((state) => state.queryString);
 
-	const groups = useAppSelector((state) => state.groups);
+	const dispatch = useDispatch();
 
 	const [showDefault, setShowDefault] = useState(true);
 	const defaultUI = [1, 2, 3, 4];
 
-	const dispatch = useDispatch();
 	useEffect(() => {
-		if (searchContent.length < 3 && searchContent.length > 0) return;
-
-		console.log("calling fetchgroup");
-		setShowDefault(true);
-		fetchGroup({ status: "all-groups", query: searchContent })
+		if (groups.length === 0) setShowDefault(true);
+		fetchGroup({ status: "all-groups", query: query })
 			.then((response) => {
 				console.log("Group fetched!");
-				dispatch({ type: "group/set", payload: response });
+				dispatch({
+					type: "group/search/complete",
+					payload: {
+						query,
+						group: response,
+					},
+				});
 				setShowDefault(false);
 			})
 			.catch((error) => console.log(error.message));
-	}, [searchContent]); // eslint-disable-line react-hooks/exhaustive-deps
+	}, [query]); // eslint-disable-line react-hooks/exhaustive-deps
 
-	const handleSearch = (event: React.ChangeEvent<HTMLInputElement>) => {
-		setSearchContent(event.target.value);
-	};
+	const handleSearch = useCallback(
+		(event: React.ChangeEvent<HTMLInputElement>) => {
+			dispatch({ type: "group/search", payload: event.target.value });
+		},
+		[] // eslint-disable-line react-hooks/exhaustive-deps
+	);
+
 	return (
 		<div
 			className={`w-full rounded-lg shadow-md bg-secondary-fine p-4 ${
 				groups.length < 4 ? "h-screen" : ""
 			}`}
 		>
-			<SearchBar onChange={handleSearch} value={searchContent} />
+			<SearchBar onChange={handleSearch} value={query} />
 			{showDefault &&
 				defaultUI.map((value, index) => (
 					<Group

@@ -5,14 +5,20 @@ import User from "../models/User.model";
 
 interface AppData{
     me?: User;
-    groups: Group[];
     isSideBarOpen: boolean;
+
+    queryString: string;
+    groupCollections: { [query: string]: number[] };
+    allGroups: { [groupId: number]: Group };
 }
 
 const intialState : AppData = {
     me: undefined,
-    groups: [],
-    isSideBarOpen:true,
+    isSideBarOpen: true,
+
+    queryString: "",
+    groupCollections: {},
+    allGroups:{},
 };
 
 const reducer:Reducer<AppData> = (currentState = intialState,dispatchedAction:AnyAction) => {
@@ -22,13 +28,24 @@ const reducer:Reducer<AppData> = (currentState = intialState,dispatchedAction:An
             return { ...currentState, me: dispatchedAction.payload };
         case "sidebar":
             return { ...currentState, isSideBarOpen: !currentState.isSideBarOpen };
-        case "group/set":
-            return { ...currentState, groups: dispatchedAction.payload };
+        case "group/search":
+            return { ...currentState, queryString: dispatchedAction.payload };
+        case "group/search/complete":
+            const groups: Group[] = dispatchedAction.payload.group as Group[];
+            const groupIds = groups.map((value) => value.id);
+            
+            const normalizeGroup = groups.reduce((prev, group) => ({...prev, [group.id]:group}), { });
+
+            return {
+                ...currentState, groupCollections: { ...currentState.groupCollections, [dispatchedAction.payload.query]: groupIds },
+                allGroups :{...currentState.allGroups,...normalizeGroup}
+            };
         default:
             return currentState;
     }
 }
 
-export const store = createStore(reducer);
+export const store = createStore(reducer,
+    window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__());
 
 export const useAppSelector: TypedUseSelectorHook<AppData> = useSelector;
