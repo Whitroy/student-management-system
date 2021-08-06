@@ -47,11 +47,16 @@ const Login: React.FC<Props> = (props) => {
 
 		onSubmit: () => {
 			console.log("Submitting!");
-			login(values).then((user) => {
-				setSubmitting(false);
-				authActions.login(user);
-				history.push("/dashboard");
-			});
+			login(values)
+				.then((user) => {
+					setSubmitting(false);
+					authActions.login(user);
+					history.push("/dashboard");
+				})
+				.catch((error) => {
+					setSubmitting(false);
+					console.log(error.message);
+				});
 		},
 	});
 
