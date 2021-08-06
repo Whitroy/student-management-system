@@ -1,6 +1,6 @@
-import React, { useState } from "react";
-import { useDispatch } from "react-redux";
-import { sideBarSelector } from "../../store/reducers/ui.reducer";
+import React, { useCallback, useState } from "react";
+import { uiAction } from "../../store/actions/ui.action";
+import { sideBarSelector } from "../../store/selectors/ui.selector";
 import { useAppSelector } from "../../store/store";
 import ExpandableNavLink from "./ExpandableNavLink";
 import MenuItem from "./MenuItem";
@@ -20,17 +20,16 @@ const MenuList: React.FC<Props> = ({ children, className }) => {
 
 	const [currentActive, setCurrentActive] = useState(-1);
 
-	const handleCollapse = (index: number) => {
+	const handleCollapse = useCallback((index: number) => {
 		if (index === currentActive) setCurrentActive(-1);
 		else setCurrentActive(index);
-	};
+	}, []); // eslint-disable-line react-hooks/exhaustive-deps
 
-	const dispatch = useDispatch();
-	const handleMenuClose = () => {
-		dispatch({ type: "sidebar" });
-	};
+	const handleMenuClose = useCallback(() => {
+		uiAction.sideBarToggle();
+	}, []); // eslint-disable-line react-hooks/exhaustive-deps
 
-	const sideBarState = useAppSelector(sideBarSelector());
+	const sideBarState = useAppSelector(sideBarSelector);
 
 	return (
 		<>
@@ -49,7 +48,7 @@ const MenuList: React.FC<Props> = ({ children, className }) => {
 						title={value.props.title}
 						handleCollapse={handleCollapse}
 						index={index}
-						key={index}
+						key={value.props.title}
 					>
 						{value.props.children}
 					</ExpandableNavLink>

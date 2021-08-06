@@ -4,8 +4,8 @@ import { authActions } from "./store/actions/auth.actions";
 import { me } from "./api/User.api";
 import LoadingPage from "./pages/Loading.page";
 import NotFoundPage from "./pages/NotFound.page";
-import { userSelector } from "./store/reducers/user.reducer";
 import { useAppSelector } from "./store/store";
+import { meSelector } from "./store/selectors/user.selectors";
 
 const AuthPageLazy = React.lazy(() => import("./pages/Auth.page"));
 const AppMainLazy = React.lazy(() => import("./pages/App.main.page"));
@@ -15,7 +15,7 @@ interface Props {}
 const { LOGIN_TOKEN_KEY } = require("./api/Config.json");
 
 const App: React.FC<Props> = (props) => {
-	const user = useAppSelector(userSelector());
+	const user = useAppSelector(meSelector);
 	const token = localStorage.getItem(LOGIN_TOKEN_KEY);
 	console.log("App render");
 	useEffect(() => {

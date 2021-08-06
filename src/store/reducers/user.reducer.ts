@@ -2,7 +2,6 @@ import { Reducer } from "redux";
 import { ME_FETCH, ME_LOGIN } from "../actions/actions.constants";
 
 import User from "../../models/User.model";
-import { AppData } from "../store";
 
 export interface UserState{
     userCollection : {[id:number] : User}
@@ -11,12 +10,6 @@ export interface UserState{
 const intialState: UserState = {
     userCollection: {},
 }
-
-export const userSelector = () => (state:AppData) => {
-    if (state.auth.userID)
-        return state.user.userCollection[state.auth.userID];
-    return undefined;
-};
 
 export const userReducer: Reducer<UserState> = (state = intialState, action) => {
     switch (action.type) {

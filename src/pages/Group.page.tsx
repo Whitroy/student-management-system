@@ -4,17 +4,17 @@ import { groupActions } from "../store/actions/group.action";
 import { fetchGroup } from "../api/Group.api";
 import Group from "../components/Group/Group";
 import SearchBar from "../components/SearchBar/SearchBar";
-import {
-	groupSelector,
-	groupQuerySelector,
-} from "../store/reducers/group.reducer";
 import { useAppSelector } from "../store/store";
+import {
+	groupQuerySelector,
+	groupsByQuerySelector,
+} from "../store/selectors/group.selectors";
 
 interface Props {}
 
 const GroupPage: React.FC<Props> = (props) => {
-	const groups = useAppSelector(groupSelector());
-	const query = useAppSelector(groupQuerySelector());
+	const groups = useAppSelector(groupsByQuerySelector);
+	const query = useAppSelector(groupQuerySelector);
 
 	const [showDefault, setShowDefault] = useState(false);
 	const defaultUI = [1, 2, 3, 4];

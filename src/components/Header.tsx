@@ -4,13 +4,13 @@ import DropDown from "./DropDown/DropDown";
 import Item from "./DropDown/Item";
 import H2 from "./Basic/H2";
 import { useAppSelector } from "../store/store";
-import { userSelector } from "../store/reducers/user.reducer";
 import { uiAction } from "../store/actions/ui.action";
+import { meSelector } from "../store/selectors/user.selectors";
 
 interface Props {}
 
 const Header: React.FC<Props> = () => {
-	const user = useAppSelector(userSelector());
+	const user = useAppSelector(meSelector);
 	const handleClick = () => {
 		uiAction.sideBarToggle();
 	};

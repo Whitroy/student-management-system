@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useCallback } from "react";
 import { NavLink } from "react-router-dom";
 import { HiChevronUp } from "react-icons/hi";
 import H2 from "../Basic/H2";
@@ -32,11 +32,11 @@ const ExpandableNavLink: React.FC<Props> = ({
 			);
 	});
 
-	const handleClick = () => {
+	const handleClick = useCallback(() => {
 		if (!to) {
 			handleCollapse(index);
 		}
-	};
+	}, []); // eslint-disable-line react-hooks/exhaustive-deps
 
 	const listSize = children?.length;
 

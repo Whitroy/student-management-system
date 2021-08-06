@@ -1,8 +1,6 @@
 import { Reducer } from "redux";
 import { GROUP_QUERY, GROUP_QUERY_COMPLETED } from "../actions/actions.constants";
-
 import Group from "../../models/Group.model";
-import { AppData } from "../store";
 
 export interface GroupState{
     query: string;
@@ -15,16 +13,6 @@ const intialState : GroupState = {
     groupCollections: {},
     groups:{}
 };
-
-export const groupSelector = () => (state:AppData) => {
-    const currentGroupIds = state.groups.groupCollections[state.groups.query] || [];
-	const currentGroup = currentGroupIds.map(
-		(groupId) => state.groups.groups[groupId]
-    );
-	return currentGroup;
-};
-
-export const groupQuerySelector = () => (state:AppData) => state.groups.query;
 
 export const groupReducer: Reducer<GroupState> = (state = intialState, action) => {
     switch (action.type) {

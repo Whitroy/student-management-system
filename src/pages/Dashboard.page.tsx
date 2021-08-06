@@ -1,6 +1,6 @@
 import React from "react";
 import { Redirect, Route, Switch } from "react-router-dom";
-import { sideBarSelector } from "../store/reducers/ui.reducer";
+import { sideBarSelector } from "../store/selectors/ui.selector";
 import { useAppSelector } from "../store/store";
 import GroupPage from "./Group.page";
 import ProfilePage from "./Profile.page";
@@ -8,7 +8,7 @@ import ProfilePage from "./Profile.page";
 interface Props {}
 
 const Dashboard: React.FC<Props> = () => {
-	const sideBarState = useAppSelector(sideBarSelector());
+	const sideBarState = useAppSelector(sideBarSelector);
 
 	return (
 		<div className="flex">
