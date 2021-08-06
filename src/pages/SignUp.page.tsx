@@ -16,6 +16,7 @@ import { SiMailDotRu } from "react-icons/si";
 interface Props {}
 
 const SignUp: React.FC<Props> = (props) => {
+	console.log("Sign up page render");
 	const [showPassword, setShowPassword] = useState(false);
 	const {
 		handleSubmit,

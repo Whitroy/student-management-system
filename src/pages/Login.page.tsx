@@ -13,15 +13,14 @@ import { useFormik } from "formik";
 import * as yup from "yup";
 import ToggleButton from "../components/ToggleButton";
 import { login } from "../api/Auth.api";
-import { useDispatch } from "react-redux";
+import { authActions } from "../store/actions/auth.actions";
 
 interface Props {}
 
 const Login: React.FC<Props> = (props) => {
+	console.log("Login Page render");
 	const history = useHistory();
 	const [showPassword, setShowPassword] = useState(false);
-
-	const dispatch = useDispatch();
 
 	const {
 		handleSubmit,
@@ -50,7 +49,7 @@ const Login: React.FC<Props> = (props) => {
 			console.log("Submitting!");
 			login(values).then((user) => {
 				setSubmitting(false);
-				dispatch({ type: "me/login", payload: user });
+				authActions.login(user);
 				history.push("/dashboard");
 			});
 		},

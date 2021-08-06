@@ -1,14 +1,14 @@
 import React from "react";
 import { Redirect, Route, Switch } from "react-router-dom";
+import { sideBarSelector } from "../store/reducers/ui.reducer";
 import { useAppSelector } from "../store/store";
-
 import GroupPage from "./Group.page";
 import ProfilePage from "./Profile.page";
 
 interface Props {}
 
 const Dashboard: React.FC<Props> = () => {
-	const sideBarState = useAppSelector((state) => state.isSideBarOpen);
+	const sideBarState = useAppSelector(sideBarSelector());
 
 	return (
 		<div className="flex">

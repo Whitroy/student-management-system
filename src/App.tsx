@@ -1,9 +1,10 @@
 import React, { Suspense, useEffect } from "react";
-import { useDispatch } from "react-redux";
 import { BrowserRouter, Redirect, Route, Switch } from "react-router-dom";
+import { authActions } from "./store/actions/auth.actions";
 import { me } from "./api/User.api";
 import LoadingPage from "./pages/Loading.page";
 import NotFoundPage from "./pages/NotFound.page";
+import { userSelector } from "./store/reducers/user.reducer";
 import { useAppSelector } from "./store/store";
 
 const AuthPageLazy = React.lazy(() => import("./pages/Auth.page"));
@@ -14,13 +15,13 @@ interface Props {}
 const { LOGIN_TOKEN_KEY } = require("./api/Config.json");
 
 const App: React.FC<Props> = (props) => {
-	const user = useAppSelector((state) => state.me);
+	const user = useAppSelector(userSelector());
 	const token = localStorage.getItem(LOGIN_TOKEN_KEY);
-	const dispatch = useDispatch();
+	console.log("App render");
 	useEffect(() => {
 		if (!token) return;
 		me().then((user) => {
-			dispatch({ type: "me", payload: user });
+			authActions.fetch(user);
 		});
 	}, []); // eslint-disable-line react-hooks/exhaustive-deps
 

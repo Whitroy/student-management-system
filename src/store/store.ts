@@ -1,49 +1,19 @@
 import { TypedUseSelectorHook, useSelector } from "react-redux";
-import { AnyAction,createStore,Reducer } from "redux";
-import Group from "../models/Group.model";
-import User from "../models/User.model";
+import {combineReducers,createStore } from "redux";
+import { authReducer } from "./reducers/auth.reducer";
+import { groupReducer } from "./reducers/group.reducer";
+import { uiReducer } from "./reducers/ui.reducer";
+import { userReducer } from "./reducers/user.reducer";
 
-interface AppData{
-    me?: User;
-    isSideBarOpen: boolean;
+const reducer = combineReducers(
+    {
+        auth: authReducer,
+        ui: uiReducer,
+        groups: groupReducer,
+        user: userReducer
+});
 
-    queryString: string;
-    groupCollections: { [query: string]: number[] };
-    allGroups: { [groupId: number]: Group };
-}
-
-const intialState : AppData = {
-    me: undefined,
-    isSideBarOpen: true,
-
-    queryString: "",
-    groupCollections: {},
-    allGroups:{},
-};
-
-const reducer:Reducer<AppData> = (currentState = intialState,dispatchedAction:AnyAction) => {
-    switch (dispatchedAction.type) {
-        case "me":
-        case "me/login":
-            return { ...currentState, me: dispatchedAction.payload };
-        case "sidebar":
-            return { ...currentState, isSideBarOpen: !currentState.isSideBarOpen };
-        case "group/search":
-            return { ...currentState, queryString: dispatchedAction.payload };
-        case "group/search/complete":
-            const groups: Group[] = dispatchedAction.payload.group as Group[];
-            const groupIds = groups.map((value) => value.id);
-            
-            const normalizeGroup = groups.reduce((prev, group) => ({...prev, [group.id]:group}), { });
-
-            return {
-                ...currentState, groupCollections: { ...currentState.groupCollections, [dispatchedAction.payload.query]: groupIds },
-                allGroups :{...currentState.allGroups,...normalizeGroup}
-            };
-        default:
-            return currentState;
-    }
-}
+export type AppData = ReturnType<typeof reducer>;
 
 export const store = createStore(reducer,
     window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__());

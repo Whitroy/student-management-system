@@ -1,40 +1,32 @@
 import React, { useEffect, useState } from "react";
 import { useCallback } from "react";
-import { useDispatch } from "react-redux";
+import { groupActions } from "../store/actions/group.action";
 import { fetchGroup } from "../api/Group.api";
 import Group from "../components/Group/Group";
 import SearchBar from "../components/SearchBar/SearchBar";
+import {
+	groupSelector,
+	groupQuerySelector,
+} from "../store/reducers/group.reducer";
 import { useAppSelector } from "../store/store";
 
 interface Props {}
 
 const GroupPage: React.FC<Props> = (props) => {
-	const groups = useAppSelector((state) => {
-		const currentGroupIds = state.groupCollections[state.queryString] || [];
-		const currentGroup = currentGroupIds.map(
-			(groupId) => state.allGroups[groupId]
-		);
-		return currentGroup;
-	});
-	const query = useAppSelector((state) => state.queryString);
+	const groups = useAppSelector(groupSelector());
+	const query = useAppSelector(groupQuerySelector());
 
-	const dispatch = useDispatch();
-
-	const [showDefault, setShowDefault] = useState(true);
+	const [showDefault, setShowDefault] = useState(false);
 	const defaultUI = [1, 2, 3, 4];
+
+	console.log("Group page render");
 
 	useEffect(() => {
 		if (groups.length === 0) setShowDefault(true);
 		fetchGroup({ status: "all-groups", query: query })
-			.then((response) => {
+			.then((groups) => {
 				console.log("Group fetched!");
-				dispatch({
-					type: "group/search/complete",
-					payload: {
-						query,
-						group: response,
-					},
-				});
+				groupActions.groupQueryCompleted(query, groups);
 				setShowDefault(false);
 			})
 			.catch((error) => console.log(error.message));
@@ -42,7 +34,7 @@ const GroupPage: React.FC<Props> = (props) => {
 
 	const handleSearch = useCallback(
 		(event: React.ChangeEvent<HTMLInputElement>) => {
-			dispatch({ type: "group/search", payload: event.target.value });
+			groupActions.groupQuery(event.target.value);
 		},
 		[] // eslint-disable-line react-hooks/exhaustive-deps
 	);

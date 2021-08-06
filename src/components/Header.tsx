@@ -4,15 +4,15 @@ import DropDown from "./DropDown/DropDown";
 import Item from "./DropDown/Item";
 import H2 from "./Basic/H2";
 import { useAppSelector } from "../store/store";
-import { useDispatch } from "react-redux";
+import { userSelector } from "../store/reducers/user.reducer";
+import { uiAction } from "../store/actions/ui.action";
 
 interface Props {}
 
 const Header: React.FC<Props> = () => {
-	const user = useAppSelector((state) => state.me);
-	const dispatch = useDispatch();
+	const user = useAppSelector(userSelector());
 	const handleClick = () => {
-		dispatch({ type: "sidebar" });
+		uiAction.sideBarToggle();
 	};
 	return (
 		<header className=" p-2 px-8 bg-secondary-finest shadow-md flex items-center justify-between">

@@ -10,12 +10,16 @@ import { VscSaveAs } from "react-icons/vsc";
 import { useFormik } from "formik";
 import * as yup from "yup";
 import { useAppSelector } from "../store/store";
+import { userSelector } from "../store/reducers/user.reducer";
+import { sideBarSelector } from "../store/reducers/ui.reducer";
 
 interface Props {}
 
 const ProfilePage: React.FC<Props> = (props) => {
-	const user = useAppSelector((state) => state.me);
-	const sideBarState = useAppSelector((state) => state.isSideBarOpen);
+	console.log("Profile Page render");
+	const user = useAppSelector(userSelector());
+	const sideBarState = useAppSelector(sideBarSelector());
+
 	const {
 		touched,
 		errors,

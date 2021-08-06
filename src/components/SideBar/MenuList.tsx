@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
+import { sideBarSelector } from "../../store/reducers/ui.reducer";
 import { useAppSelector } from "../../store/store";
 import ExpandableNavLink from "./ExpandableNavLink";
 import MenuItem from "./MenuItem";
@@ -29,7 +30,7 @@ const MenuList: React.FC<Props> = ({ children, className }) => {
 		dispatch({ type: "sidebar" });
 	};
 
-	const sideBarState = useAppSelector((state) => state.isSideBarOpen);
+	const sideBarState = useAppSelector(sideBarSelector());
 
 	return (
 		<>

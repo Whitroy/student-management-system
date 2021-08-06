@@ -5,11 +5,12 @@ import LinkContent from "./LinkContent";
 import { IoIosApps, IoMdMap } from "react-icons/io";
 import MenuList from "./MenuList";
 import { useAppSelector } from "../../store/store";
+import { sideBarSelector } from "../../store/reducers/ui.reducer";
 
 interface Props {}
 
 const SideBar: React.FC<Props> = () => {
-	const sideBarState = useAppSelector((state) => state.isSideBarOpen);
+	const sideBarState = useAppSelector(sideBarSelector());
 	return (
 		<>
 			<MenuList
