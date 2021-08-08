@@ -3,6 +3,7 @@ import { Redirect, Route, Switch } from "react-router-dom";
 import { sideBarSelector } from "../store/selectors/ui.selector";
 import { useAppSelector } from "../store/store";
 import GroupPage from "./Group.page";
+import GroupsPage from "./Groups.page";
 import ProfilePage from "./Profile.page";
 
 interface Props {}
@@ -21,7 +22,10 @@ const Dashboard: React.FC<Props> = () => {
 			<div className="bg-secondary-finest w-full pt-28 px-2">
 				<Switch>
 					<Redirect from="/dashboard" to="/dashboard/groups" exact />
-					<Route path="/dashboard/groups">
+					<Route path="/dashboard/groups" exact>
+						<GroupsPage />
+					</Route>
+					<Route path="/dashboard/groups/group/:groupId">
 						<GroupPage />
 					</Route>
 					<Route path="/dashboard/profile">

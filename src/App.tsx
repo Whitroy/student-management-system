@@ -49,6 +49,7 @@ const App: React.FC<Props> = (props) => {
 						path={[
 							"/dashboard",
 							"/dashboard/groups",
+							"/dashboard/groups/group/:groupId",
 							"/recordings/batch/:batchNumber/lecture/:lectureNumber",
 							"/dashboard/profile",
 						]}

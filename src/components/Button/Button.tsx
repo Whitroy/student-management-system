@@ -8,7 +8,7 @@ interface Props extends ButtonHTMLAttributes<HTMLButtonElement> {
 	appearance?: "solid" | "outline";
 	theme?: "success" | "primary" | "warning" | "danger" | "secondary";
 	border?: "default" | "rounded";
-	children: string;
+	children?: string;
 	Icon?: IconType;
 	iconAnimation?: "spin" | "none";
 }
@@ -79,7 +79,7 @@ const Button: React.FC<Props> = ({
 		<button
 			{...rest}
 			disabled={disabled}
-			className={` px-4 py-2 text-sm ${className} 
+			className={`${children ? "px-4" : "px-2"}  py-2 text-sm ${className} 
 				${disabled ? disabledClasses : appearanceClasses} ${
 				border === "default" ? "rounded-md" : "rounded-full"
 			} flex justify-start items-center space-x-1 focus:outline-none focus:ring-2`}
@@ -89,7 +89,7 @@ const Button: React.FC<Props> = ({
 					className={`${iconAnimation === "spin" ? " animate-spin" : ""}`}
 				/>
 			)}
-			<P>{children}</P>
+			{children && <P>{children}</P>}
 		</button>
 	);
 };

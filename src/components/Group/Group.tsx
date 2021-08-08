@@ -1,5 +1,8 @@
 import React from "react";
+import { useCallback } from "react";
+import { useHistory } from "react-router-dom";
 import GroupModel from "../../models/Group.model";
+import { groupActions } from "../../store/actions/group.action";
 import H1 from "../Basic/H1";
 import P from "../Basic/P";
 
@@ -18,6 +21,13 @@ const Group: React.FC<Props> = ({
 	className,
 	showDefault,
 }) => {
+	const history = useHistory();
+	const handleClick = useCallback(() => {
+		if (showDefault) return;
+		groupActions.selectedGroupId(id);
+		history.push("/dashboard/groups/group/" + id);
+	}, []); // eslint-disable-line react-hooks/exhaustive-deps
+
 	return (
 		<div
 			className={`w-full px-4 py-6 shadow-sm flex items-center justify-start space-x-6 ${
@@ -39,18 +49,20 @@ const Group: React.FC<Props> = ({
 			/>
 			<div className="w-full">
 				<div className="flex items-center justify-between">
-					<H1
-						size="text-xl"
-						className={`text-primary-normal ${
-							showDefault
-								? `animate-pulse h-7  rounded-sm w-24 ${
-										index! & 1 ? "bg-white" : "bg-secondary-finest"
-								  }`
-								: ""
-						}`}
-					>
-						{!showDefault && name}
-					</H1>
+					<div onClick={handleClick}>
+						<H1
+							size="text-xl"
+							className={`text-primary-normal ${
+								showDefault
+									? `animate-pulse h-7  rounded-sm w-24 ${
+											index! & 1 ? "bg-white" : "bg-secondary-finest"
+									  }`
+									: "cursor-pointer hover:text-primary-light"
+							}`}
+						>
+							{!showDefault && name}
+						</H1>
+					</div>
 					<H1
 						size="text-sm"
 						className={`text-secondary-dark${
