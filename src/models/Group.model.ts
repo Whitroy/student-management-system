@@ -1,8 +1,8 @@
+import { Entity } from "./entity";
 import State from "./State.model";
 import User from "./User.model";
 
-export default interface Group {
-	id: number;
+export default interface Group extends Entity {
     name: string;
     is_private?: boolean;
     description: string;

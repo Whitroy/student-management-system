@@ -22,7 +22,7 @@ const GroupPage: React.FC<Props> = (props) => {
 	console.log("Group page render");
 
 	useEffect(() => {
-		if (groups.length === 0) setShowDefault(true);
+		if (groups.length === 0 && !showDefault) setShowDefault(true);
 		fetchGroup({ status: "all-groups", query: query })
 			.then((groups) => {
 				console.log("Group fetched!");

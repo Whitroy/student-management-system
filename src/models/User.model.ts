@@ -1,5 +1,6 @@
-export default interface User{
-    id: number,
+import { Entity } from "./entity";
+
+export default interface User extends Entity{
     first_name: string,
     middle_name: string,
     last_name: string,

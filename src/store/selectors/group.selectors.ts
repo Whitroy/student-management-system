@@ -9,9 +9,9 @@ const groupCollectionSelector = createSelector([groupSelector], (groupState) => 
     return groupState.groupCollections;
 });
 
-const groupsSelector = createSelector([groupSelector], (groupState) => groupState.groups);
+const groupsByIdSelector = createSelector([groupSelector], (groupState) => groupState.byId);
 
-export const groupsByQuerySelector = createSelector([groupQuerySelector,groupsSelector,groupCollectionSelector],
+export const groupsByQuerySelector = createSelector([groupQuerySelector,groupsByIdSelector,groupCollectionSelector],
     (query,groupCollection,queryCollection) => {
         const currentGroupIds = queryCollection[query] || [];
 	    const currentGroup = currentGroupIds.map(
