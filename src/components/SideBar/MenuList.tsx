@@ -20,10 +20,13 @@ const MenuList: React.FC<Props> = ({ children, className }) => {
 
 	const [currentActive, setCurrentActive] = useState(-1);
 
-	const handleCollapse = useCallback((index: number) => {
-		if (index === currentActive) setCurrentActive(-1);
-		else setCurrentActive(index);
-	}, []); // eslint-disable-line react-hooks/exhaustive-deps
+	const handleCollapse = useCallback(
+		(index: number) => {
+			if (index === currentActive) setCurrentActive(-1);
+			else setCurrentActive(index);
+		},
+		[currentActive]
+	); // eslint-disable-line react-hooks/exhaustive-deps
 
 	const handleMenuClose = useCallback(() => {
 		uiAction.sideBarToggle();

@@ -32,11 +32,11 @@ const ExpandableNavLink: React.FC<Props> = ({
 			);
 	});
 
-	const handleClick = useCallback(() => {
+	const handleClick = () => {
 		if (!to) {
 			handleCollapse(index);
 		}
-	}, []); // eslint-disable-line react-hooks/exhaustive-deps
+	}; // eslint-disable-line react-hooks/exhaustive-deps
 
 	const listSize = children?.length;
 
