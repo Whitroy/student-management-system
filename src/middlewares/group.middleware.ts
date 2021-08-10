@@ -1,13 +1,13 @@
 import { fetchGroupsAPI, GroupRequest } from "../api/Group.api";
 import { groupActions } from "../store/actions/group.action";
-import { groupCollectionSelector } from "../store/selectors/group.selectors";
+import { groupQueryLoadingSelector } from "../store/selectors/group.selectors";
 import { store } from "../store/store";
 
 export const fetchGroups = (data: GroupRequest) => {
-	const queryCollection = groupCollectionSelector(store.getState());
+	const loadingCollection = groupQueryLoadingSelector(store.getState());
 	const query = data.query!;
-	groupActions.query(query, queryCollection[query] ? false : true);
-	if (queryCollection[query]) return;
+	groupActions.query(query, true);
+	if (loadingCollection[query]) return;
 
 	console.log("middle ware called");
 
