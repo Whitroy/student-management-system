@@ -15,8 +15,7 @@ interface Props {}
 const GroupsPage: React.FC<Props> = (props) => {
 	const groups = useAppSelector(groupsByQuerySelector);
 	const query = useAppSelector(groupQuerySelector);
-	const loadingCollection = useAppSelector(groupQueryLoadingSelector);
-	const showLoading = loadingCollection[query] || false;
+	const showLoading = useAppSelector(groupQueryLoadingSelector);
 	const defaultUI = [1, 2, 3, 4];
 
 	console.log("Group page render", showLoading);

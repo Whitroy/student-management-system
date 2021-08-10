@@ -1,20 +1,27 @@
+import axios, { Canceler } from "axios";
 import { fetchGroupsAPI, GroupRequest } from "../api/Group.api";
 import { groupActions } from "../store/actions/group.action";
 import { groupQueryLoadingSelector } from "../store/selectors/group.selectors";
 import { store } from "../store/store";
 
+let canceler: Canceler | undefined;
+
 export const fetchGroups = (data: GroupRequest) => {
-	const loadingCollection = groupQueryLoadingSelector(store.getState());
 	const query = data.query!;
-	groupActions.query(query, true);
-	if (loadingCollection[query]) return;
+
+	canceler && canceler();
 
 	console.log("middle ware called");
 
-	fetchGroupsAPI(data)
+	groupActions.query(query);
+
+	const { cancel, token } = axios.CancelToken.source();
+	canceler = cancel;
+	fetchGroupsAPI(data, token)
 		.then((groups) => {
 			console.log("Group fetched!");
-			groupActions.queryCompleted(data.query!, groups);
+			groups && groupActions.queryCompleted(data.query!, groups);
+			canceler = undefined;
 		})
 		.catch((error) => console.log(error.message));
 };

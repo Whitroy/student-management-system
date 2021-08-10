@@ -1,4 +1,4 @@
-import axios from "axios";
+import axios, { CancelToken } from "axios";
 import Group from "../models/Group.model";
 
 const { BASE_URL } = require("./Config.json");
@@ -22,10 +22,14 @@ interface IndiGroupResponse {
 	data: Group;
 }
 
-export const fetchGroupsAPI = async (data?: GroupRequest) => {
+export const fetchGroupsAPI = async (
+	data?: GroupRequest,
+	token?: CancelToken
+) => {
 	const url = BASE_URL + "/groups";
 	const response = await axios.get<GroupResponse>(url, {
 		params: data ? data : { status: "all-groups" },
+		cancelToken: token,
 		headers: { Authorization: localStorage.getItem("login_token") },
 	});
 	return response.data.data;
