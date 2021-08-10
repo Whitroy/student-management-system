@@ -1,14 +1,23 @@
-import axios from "axios"
+import axios from "axios";
 import User from "../models/User.model";
 
 const { BASE_URL } = require("./Config.json");
 
-interface MeRespone{
-    data: User;
+interface MeRespone {
+	data: User;
 }
 export const me = async () => {
-    const url = BASE_URL + "/me";
-    const response = await axios.get<MeRespone>(url,{
-        headers: { Authorization: localStorage.getItem("login_token") }});
-    return response.data.data;
-}
+	const url = BASE_URL + "/me";
+	const response = await axios.get<MeRespone>(url, {
+		headers: { Authorization: localStorage.getItem("login_token") },
+	});
+	return response.data.data;
+};
+
+export const meUpdate = async (data: any) => {
+	const url = BASE_URL + "/me";
+	const response = await axios.put(url, data, {
+		headers: { Authorization: localStorage.getItem("login_token") },
+	});
+	return response.data.data;
+};

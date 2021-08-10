@@ -1,6 +1,7 @@
 //Auth
 export const ME_LOGIN = "me/login";
 export const ME_FETCH = "me/fetch";
+export const ME_UPDATE = "me/update";
 
 //Group
 export const GROUP_QUERY = "groups/query";

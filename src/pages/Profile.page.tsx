@@ -12,6 +12,9 @@ import * as yup from "yup";
 import { useAppSelector } from "../store/store";
 import { sideBarSelector } from "../store/selectors/ui.selector";
 import { meSelector } from "../store/selectors/user.selectors";
+import { meUpdate } from "../api/User.api";
+import { authActions } from "../store/actions/auth.actions";
+import User from "../models/User.model";
 
 interface Props {}
 
@@ -29,30 +32,33 @@ const ProfilePage: React.FC<Props> = (props) => {
 	} = useFormik({
 		initialValues: {
 			firstName: user!.first_name,
-			profilePic: user!.profile_pic_url,
+			//profilePic: user!.profile_pic_url,
 			middleName: user!.middle_name,
 			lastName: user!.last_name,
-			DOB: "",
-			mobileNo: user!.phone_number,
-			bio: "",
+			//DOB: "",
+			//mobileNo: user!.phone_number,
+			//bio: "",
 		},
 		validationSchema: yup.object().shape({
 			firstName: yup.string().required("First Name is a required Field"),
-			middleName: yup.string(),
+			//middleName: yup.string(),
 			lastName: yup.string().required("Last Name is a required Field"),
-			Email: yup.string().required().email(),
-			DOB: yup.date().required("Date Of Birth is required Field"),
-			mobileNo: yup
-				.string()
-				.required("Mobile Number is required Field")
-				.matches(
-					/^(\+?\d{1,4}[\s-])?(?!0+\s+,?$)\d{10}\s*,?$/,
-					"Mobile Number is not valid"
-				),
-			bio: yup.string(),
+			//Email: yup.string().required().email(),
+			// DOB: yup.date().required("Date Of Birth is required Field"),
+			// mobileNo: yup
+			// 	.string()
+			// 	.required("Mobile Number is required Field")
+			// 	.matches(
+			// 		/^(\+?\d{1,4}[\s-])?(?!0+\s+,?$)\d{10}\s*,?$/,
+			// 		"Mobile Number is not valid"
+			// 	),
+			//bio: yup.string(),
 		}),
-		onSubmit: () => {
+		onSubmit: (userData) => {
 			console.log("Submit");
+			meUpdate({ first_name: userData.firstName }).then((user) =>
+				authActions.update(user as User)
+			);
 		},
 		onReset: () => {
 			console.log("Reset");
@@ -88,7 +94,7 @@ const ProfilePage: React.FC<Props> = (props) => {
 									id="firstName"
 									placeholder="First Name"
 									type="text"
-									required
+									//			required
 									mandatory={true}
 									{...getFieldProps("firstName")}
 									errors={errors.firstName}
@@ -98,7 +104,7 @@ const ProfilePage: React.FC<Props> = (props) => {
 									id="middleName"
 									placeholder="Middle Name"
 									type="text"
-									{...getFieldProps("middleName")}
+									//				{...getFieldProps("middleName")}
 									errors={errors.middleName}
 									touched={touched.middleName}
 								/>
@@ -120,21 +126,21 @@ const ProfilePage: React.FC<Props> = (props) => {
 									id="DOB"
 									placeholder="D.O.B"
 									type="date"
-									required
+									//required
 									mandatory={true}
-									{...getFieldProps("DOB")}
-									errors={errors.DOB}
-									touched={touched.DOB}
+									//						{...getFieldProps("DOB")}
+									//						errors={errors.DOB}
+									//						touched={touched.DOB}
 								/>
 								<Input
 									id="mobileNumber"
 									placeholder="Mobile No"
 									type="text"
-									required
+									//			required
 									mandatory={true}
-									{...getFieldProps("mobileNo")}
-									errors={errors.mobileNo}
-									touched={touched.mobileNo}
+									//						{...getFieldProps("mobileNo")}
+									//						errors={errors.mobileNo}
+									//						touched={touched.mobileNo}
 								/>
 							</div>
 						</div>
@@ -156,7 +162,7 @@ const ProfilePage: React.FC<Props> = (props) => {
 							rows={4}
 							className="bg-transparent mt-1 p-2 border-2 border-secondary-light rounded-md w-full focus:outline-none focus:ring-2"
 							placeholder="Write awesome thing about yourself here!"
-							{...getFieldProps("bio")}
+							//				{...getFieldProps("bio")}
 						/>
 					</div>
 				</div>

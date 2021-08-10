@@ -1,8 +1,6 @@
 import axios, { Canceler } from "axios";
 import { fetchGroupsAPI, GroupRequest } from "../api/Group.api";
 import { groupActions } from "../store/actions/group.action";
-import { groupQueryLoadingSelector } from "../store/selectors/group.selectors";
-import { store } from "../store/store";
 
 let canceler: Canceler | undefined;
 
