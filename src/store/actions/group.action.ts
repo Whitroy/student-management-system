@@ -8,7 +8,10 @@ import {
 	GROUP_QUERY_COMPLETED,
 } from "./actions.constants";
 
-const queryAction = (query: string) => ({ type: GROUP_QUERY, payload: query });
+const queryAction = (query: string, loading: boolean) => ({
+	type: GROUP_QUERY,
+	payload: { query, loading },
+});
 const queryCompleted = (query: string, groups: Group[]) => ({
 	type: GROUP_QUERY_COMPLETED,
 	payload: { query, groups },

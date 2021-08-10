@@ -1,40 +1,29 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { useCallback } from "react";
-import { groupActions } from "../store/actions/group.action";
-import { fetchGroups } from "../api/Group.api";
 import Group from "../components/Group/Group";
 import SearchBar from "../components/SearchBar/SearchBar";
 import { useAppSelector } from "../store/store";
 import {
+	groupQueryLoadingSelector,
 	groupQuerySelector,
 	groupsByQuerySelector,
 } from "../store/selectors/group.selectors";
+import { fetchGroups } from "../middlewares/group.middleware";
 
 interface Props {}
 
 const GroupsPage: React.FC<Props> = (props) => {
 	const groups = useAppSelector(groupsByQuerySelector);
 	const query = useAppSelector(groupQuerySelector);
-
-	const [showDefault, setShowDefault] = useState(false);
+	const loadingCollection = useAppSelector(groupQueryLoadingSelector);
+	const showLoading = loadingCollection[query] || false;
 	const defaultUI = [1, 2, 3, 4];
 
-	console.log("Group page render");
-
-	useEffect(() => {
-		if (groups.length === 0 && !showDefault) setShowDefault(true);
-		fetchGroups({ status: "all-groups", query: query })
-			.then((groups) => {
-				console.log("Group fetched!");
-				groupActions.queryCompleted(query, groups);
-				setShowDefault(false);
-			})
-			.catch((error) => console.log(error.message));
-	}, [query]); // eslint-disable-line react-hooks/exhaustive-deps
+	console.log("Group page render", showLoading);
 
 	const handleSearch = useCallback(
 		(event: React.ChangeEvent<HTMLInputElement>) => {
-			groupActions.query(event.target.value);
+			fetchGroups({ status: "all-groups", query: event.target.value });
 		},
 		[] // eslint-disable-line react-hooks/exhaustive-deps
 	);
@@ -46,7 +35,7 @@ const GroupsPage: React.FC<Props> = (props) => {
 			}`}
 		>
 			<SearchBar onChange={handleSearch} value={query} />
-			{showDefault &&
+			{showLoading &&
 				defaultUI.map((value, index) => (
 					<Group
 						id={value}
@@ -61,7 +50,7 @@ const GroupsPage: React.FC<Props> = (props) => {
 						showDefault={true}
 					/>
 				))}
-			{!showDefault &&
+			{!showLoading &&
 				groups.map((group, index) => {
 					return (
 						<Group

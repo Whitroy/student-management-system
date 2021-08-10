@@ -3,7 +3,7 @@ import Group from "../models/Group.model";
 
 const { BASE_URL } = require("./Config.json");
 
-interface GroupRequest {
+export interface GroupRequest {
 	limit?: number;
 	offset?: number;
 	query?: string;
@@ -22,7 +22,7 @@ interface IndiGroupResponse {
 	data: Group;
 }
 
-export const fetchGroups = async (data?: GroupRequest) => {
+export const fetchGroupsAPI = async (data?: GroupRequest) => {
 	const url = BASE_URL + "/groups";
 	const response = await axios.get<GroupResponse>(url, {
 		params: data ? data : { status: "all-groups" },

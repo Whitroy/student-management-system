@@ -8,7 +8,7 @@ export const groupQuerySelector = createSelector(
 	}
 );
 
-const groupCollectionSelector = createSelector(
+export const groupCollectionSelector = createSelector(
 	[groupSelector],
 	(groupState) => {
 		return groupState.groupCollections;
@@ -54,5 +54,12 @@ export const groupPrevIdSelector = createSelector(
 	[groupSelector],
 	(groupState) => {
 		return groupState.prevGroupId;
+	}
+);
+
+export const groupQueryLoadingSelector = createSelector(
+	[groupSelector],
+	(groupState) => {
+		return groupState.loading;
 	}
 );
