@@ -1,6 +1,6 @@
 import axios, { Canceler } from "axios";
 import { fetchGroupsAPI, GroupRequest } from "../api/Group.api";
-import { groupActions } from "../store/actions/group.action";
+import { groupActions } from "../store/actions/group.bind";
 
 let canceler: Canceler | undefined;
 

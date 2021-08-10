@@ -8,7 +8,7 @@ import {
 	groupQuerySelector,
 	groupsByQuerySelector,
 } from "../store/selectors/group.selectors";
-import { fetchGroups } from "../middlewares/group.middleware";
+import { groupActions } from "../store/actions/group.bind";
 
 interface Props {}
 
@@ -22,7 +22,7 @@ const GroupsPage: React.FC<Props> = (props) => {
 
 	const handleSearch = useCallback(
 		(event: React.ChangeEvent<HTMLInputElement>) => {
-			fetchGroups({ status: "all-groups", query: event.target.value });
+			groupActions.query(event.target.value);
 		},
 		[] // eslint-disable-line react-hooks/exhaustive-deps
 	);

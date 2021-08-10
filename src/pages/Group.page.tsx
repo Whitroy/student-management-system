@@ -3,7 +3,6 @@ import { useEffect } from "react";
 import { useHistory, useParams } from "react-router-dom";
 import { fetchGroup } from "../api/Group.api";
 import Button from "../components/Button/Button";
-import { groupActions } from "../store/actions/group.action";
 import {
 	currentSelectedGroupIdSelector,
 	currentSelectedGroupSelector,
@@ -17,6 +16,7 @@ import Avatar from "../components/Avatar/Avatar";
 import H1 from "../components/Basic/H1";
 import P from "../components/Basic/P";
 import { FaSpinner } from "react-icons/fa";
+import { groupActions } from "../store/actions/group.bind";
 interface Props {}
 
 const GroupPage: React.FC<Props> = (props) => {
