@@ -1,6 +1,6 @@
 import axios, { CancelToken } from "axios";
 import Group from "../models/Group.model";
-import { BASE_URL } from "./base.api";
+import { BASE_URL, get } from "./base.api";
 
 export interface GroupRequest {
 	limit?: number;
@@ -21,16 +21,13 @@ interface IndiGroupResponse {
 	data: Group;
 }
 
-export const fetchGroupsAPI = async (
-	data?: GroupRequest,
-	token?: CancelToken
-) => {
+export const fetchGroupsAPI = (data?: GroupRequest, token?: CancelToken) => {
+	console.log("Fetch api");
 	const url = BASE_URL + "/groups";
-	const response = await axios.get<GroupResponse>(url, {
+	return get<GroupResponse>(url, {
 		params: data ? data : { status: "all-groups" },
 		cancelToken: token,
 	});
-	return response.data.data;
 };
 
 export const fetchGroup = async (data: IndiGroupRequest) => {
