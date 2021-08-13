@@ -1,10 +1,15 @@
-import {createSelector} from "reselect"
-import { authSelector, userSelector } from "./app.selectors";
+import { createSelector } from "reselect";
+import { userSelector } from "./app.selectors";
+import { meIdSelector } from "./auth.selectors";
 
-const userCollectionSelector = createSelector([userSelector], (userState) => userState.byId);
+const userCollectionSelector = createSelector(
+	[userSelector],
+	(userState) => userState.byId
+);
 
-const meIdSelector = createSelector([authSelector], (authState) => authState.userID);
-
-export const meSelector = createSelector([meIdSelector,userCollectionSelector], (id,byId) => {
-    return id === undefined ? undefined : byId[id];
-});
+export const meSelector = createSelector(
+	[meIdSelector, userCollectionSelector],
+	(id, byId) => {
+		return id === undefined ? undefined : byId[id];
+	}
+);

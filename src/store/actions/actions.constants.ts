@@ -1,6 +1,11 @@
 //Auth
 export const ME_LOGIN = "me/login";
+export const ME_LOGIN_COMPLETED = "me/login_completed";
+export const ME_LOGIN_ERROR = "me/login_error";
+
 export const ME_FETCH = "me/fetch";
+export const ME_FETCHED = "me/fetched";
+
 export const ME_UPDATE = "me/update";
 
 //Group

@@ -2,7 +2,7 @@ import React from "react";
 import { useCallback } from "react";
 import { useHistory } from "react-router-dom";
 import GroupModel from "../../models/Group.model";
-import { groupActions } from "../../store/actions/group.bind";
+import { groupActions } from "../../store/binds/group.bind";
 import H1 from "../Basic/H1";
 import P from "../Basic/P";
 

@@ -1,23 +1,34 @@
-import { bindActionCreators } from "redux";
+import { LoginData } from "../../api/Auth.api";
 import User from "../../models/User.model";
-import { store } from "../store";
-import { ME_FETCH, ME_LOGIN, ME_UPDATE } from "./actions.constants";
+import {
+	ME_FETCH,
+	ME_FETCHED,
+	ME_LOGIN,
+	ME_LOGIN_COMPLETED,
+	ME_LOGIN_ERROR,
+	ME_UPDATE,
+} from "./actions.constants";
 
-const meFetchAction = (user: User) => {
-	return { type: ME_FETCH, payload: user };
+export const meFetchAction = () => {
+	return { type: ME_FETCH };
 };
-const meLoginAction = (user: User) => {
-	return { type: ME_LOGIN, payload: user };
+
+export const meFetchedAction = (user: User) => {
+	return { type: ME_FETCHED, payload: user };
 };
-const meUpdateAction = (user: User) => {
+
+export const meLoginAction = (loginData: LoginData) => {
+	return { type: ME_LOGIN, payload: loginData };
+};
+
+export const meLoginCompleted = (user: User) => {
+	return { type: ME_LOGIN_COMPLETED, payload: user };
+};
+
+export const meLoginErrorAction = (message: string) => {
+	return { type: ME_LOGIN_ERROR, payload: message };
+};
+
+export const meUpdateAction = (user: User) => {
 	return { type: ME_UPDATE, payload: user };
 };
-
-export const authActions = bindActionCreators(
-	{
-		login: meLoginAction,
-		fetch: meFetchAction,
-		update: meUpdateAction,
-	},
-	store.dispatch
-);

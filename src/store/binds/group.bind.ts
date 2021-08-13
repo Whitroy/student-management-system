@@ -5,7 +5,7 @@ import {
 	currentSelectedGroupAction,
 	queryAction,
 	queryCompleted,
-} from "./group.action";
+} from "../actions/group.action";
 
 export const groupActions = bindActionCreators(
 	{

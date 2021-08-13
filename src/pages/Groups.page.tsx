@@ -8,7 +8,7 @@ import {
 	groupQuerySelector,
 	groupsByQuerySelector,
 } from "../store/selectors/group.selectors";
-import { groupActions } from "../store/actions/group.bind";
+import { groupActions } from "../store/binds/group.bind";
 
 interface Props {}
 

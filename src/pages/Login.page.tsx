@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import { useHistory } from "react-router-dom";
 import Input from "../components/Input/PublicFormInput";
 import { FiUser } from "react-icons/fi";
 import { HiLockClosed } from "react-icons/hi";
@@ -12,21 +11,21 @@ import { FaSpinner } from "react-icons/fa";
 import { useFormik } from "formik";
 import * as yup from "yup";
 import ToggleButton from "../components/ToggleButton";
-import { login } from "../api/Auth.api";
-import { authActions } from "../store/actions/auth.actions";
+import { authActions } from "../store/binds/auth.bind";
+import { useAppSelector } from "../store/store";
+import { meError, meLoading } from "../store/selectors/auth.selectors";
 
 interface Props {}
 
 const Login: React.FC<Props> = (props) => {
-	console.log("Login Page render");
-	const history = useHistory();
 	const [showPassword, setShowPassword] = useState(false);
+
+	const loading = useAppSelector(meLoading);
+	const error = useAppSelector(meError);
 
 	const {
 		handleSubmit,
 		touched,
-		isSubmitting,
-		setSubmitting,
 		isValid,
 		errors,
 		values,
@@ -47,16 +46,17 @@ const Login: React.FC<Props> = (props) => {
 
 		onSubmit: () => {
 			console.log("Submitting!");
-			login(values)
-				.then((user) => {
-					setSubmitting(false);
-					authActions.login(user);
-					history.push("/dashboard");
-				})
-				.catch((error) => {
-					setSubmitting(false);
-					console.log(error.message);
-				});
+			authActions.login(values);
+			// loginAPI(values)
+			// 	.then((user) => {
+			// 		setSubmitting(false);
+			// 		authActions.login(user);
+			// 		history.push("/dashboard");
+			// 	})
+			// 	.catch((error) => {
+			// 		setSubmitting(false);
+			// 		console.log(error.message);
+			// 	});
 		},
 	});
 
@@ -70,7 +70,10 @@ const Login: React.FC<Props> = (props) => {
 					New Here? Log In to{" "}
 					<RouteLink to="/signup">Create an account</RouteLink>
 				</P>
-				<form className="mt-16" onSubmit={handleSubmit}>
+				<form className="mt-12 relative" onSubmit={handleSubmit}>
+					{error && (
+						<P className="text-sm text-danger-dark absolute -top-7">{error}</P>
+					)}
 					<Input
 						id="email"
 						type="email"
@@ -106,8 +109,8 @@ const Login: React.FC<Props> = (props) => {
 							type="submit"
 							disabled={!isValid}
 							className="flex-shrink-0"
-							Icon={isSubmitting ? FaSpinner : BsLock}
-							iconAnimation={isSubmitting ? "spin" : "none"}
+							Icon={loading ? FaSpinner : BsLock}
+							iconAnimation={loading ? "spin" : "none"}
 						>
 							Log in
 						</Button>

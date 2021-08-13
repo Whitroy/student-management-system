@@ -2,7 +2,7 @@ import axios from "axios";
 import User from "../models/User.model";
 import { BASE_URL, LOGIN_TOKEN_KEY } from "./base.api";
 
-interface LoginData {
+export interface LoginData {
 	email: string;
 	password: string;
 }
@@ -15,7 +15,7 @@ interface LoginResponse {
 	user: User;
 }
 
-export const login = async (data: LoginData) => {
+export const loginAPI = async (data: LoginData) => {
 	const url = BASE_URL + "/login";
 
 	const request = await axios.post<LoginResponse>(url, data);

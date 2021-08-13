@@ -1,12 +1,11 @@
 import React, { Suspense, useEffect } from "react";
 import { BrowserRouter, Redirect, Route, Switch } from "react-router-dom";
-import { authActions } from "./store/actions/auth.actions";
-import { me } from "./api/User.api";
 import LoadingPage from "./pages/Loading.page";
 import NotFoundPage from "./pages/NotFound.page";
 import { useAppSelector } from "./store/store";
-import { meSelector } from "./store/selectors/user.selectors";
 import { LOGIN_TOKEN_KEY } from "./api/base.api";
+import { authActions } from "./store/binds/auth.bind";
+import { meIdSelector } from "./store/selectors/auth.selectors";
 
 const AuthPageLazy = React.lazy(() => import("./pages/Auth.page"));
 const AppMainLazy = React.lazy(() => import("./pages/App.main.page"));
@@ -14,17 +13,18 @@ const AppMainLazy = React.lazy(() => import("./pages/App.main.page"));
 interface Props {}
 
 const App: React.FC<Props> = (props) => {
-	const user = useAppSelector(meSelector);
+	const userID = useAppSelector(meIdSelector);
 	const token = localStorage.getItem(LOGIN_TOKEN_KEY);
 	console.log("App render");
 	useEffect(() => {
 		if (!token) return;
-		me().then((user) => {
-			authActions.fetch(user);
-		});
+		authActions.fetch();
+		// me().then((user) => {
+		// 	authActions.fetch(user);
+		// });
 	}, []); // eslint-disable-line react-hooks/exhaustive-deps
 
-	if (token && !user) {
+	if (token && !userID) {
 		return <LoadingPage />;
 	}
 
@@ -32,13 +32,13 @@ const App: React.FC<Props> = (props) => {
 		<Suspense fallback={<LoadingPage />}>
 			<BrowserRouter>
 				<Switch>
-					{user ? (
+					{userID ? (
 						<Redirect to="/dashboard" from="/" exact />
 					) : (
 						<Redirect to="/login" from="/" exact />
 					)}
 					<Route path={["/login", "/signup"]} exact>
-						{user ? (
+						{userID ? (
 							<Redirect to="/dashboard" from="/" exact />
 						) : (
 							<AuthPageLazy />
@@ -54,7 +54,7 @@ const App: React.FC<Props> = (props) => {
 						]}
 						exact
 					>
-						{user ? <AppMainLazy /> : <Redirect to="/login" from="/" exact />}
+						{userID ? <AppMainLazy /> : <Redirect to="/login" from="/" exact />}
 					</Route>
 					<Route>
 						<NotFoundPage />

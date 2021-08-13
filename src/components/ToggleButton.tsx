@@ -21,6 +21,7 @@ const ToggleButton: React.FC<Props> = ({
 					{label}
 				</Switch.Label>
 				<Switch
+					type="button"
 					checked={enable}
 					onChange={setEnable}
 					className={`${

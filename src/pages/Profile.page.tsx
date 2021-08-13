@@ -12,9 +12,9 @@ import * as yup from "yup";
 import { useAppSelector } from "../store/store";
 import { sideBarSelector } from "../store/selectors/ui.selector";
 import { meSelector } from "../store/selectors/user.selectors";
-import { meUpdate } from "../api/User.api";
-import { authActions } from "../store/actions/auth.actions";
+import { meUpdateAPI } from "../api/User.api";
 import User from "../models/User.model";
+import { authActions } from "../store/binds/auth.bind";
 
 interface Props {}
 
@@ -56,7 +56,7 @@ const ProfilePage: React.FC<Props> = (props) => {
 		}),
 		onSubmit: (userData) => {
 			console.log("Submit");
-			meUpdate({ first_name: userData.firstName }).then((user) =>
+			meUpdateAPI({ first_name: userData.firstName }).then((user) =>
 				authActions.update(user as User)
 			);
 		},

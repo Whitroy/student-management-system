@@ -16,7 +16,7 @@ import Avatar from "../components/Avatar/Avatar";
 import H1 from "../components/Basic/H1";
 import P from "../components/Basic/P";
 import { FaSpinner } from "react-icons/fa";
-import { groupActions } from "../store/actions/group.bind";
+import { groupActions } from "../store/binds/group.bind";
 interface Props {}
 
 const GroupPage: React.FC<Props> = (props) => {
