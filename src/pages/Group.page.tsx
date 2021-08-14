@@ -1,6 +1,6 @@
 import React from "react";
 import { useEffect } from "react";
-import { useHistory, useParams } from "react-router-dom";
+import { Link, useHistory, useParams } from "react-router-dom";
 import Button from "../components/Button/Button";
 import {
 	currentSelectedGroupIdSelector,
@@ -18,6 +18,7 @@ import H1 from "../components/Basic/H1";
 import P from "../components/Basic/P";
 import { FaSpinner } from "react-icons/fa";
 import { groupActions } from "../store/binds/group.bind";
+import { BiLeftArrow } from "react-icons/bi";
 interface Props {}
 
 const GroupPage: React.FC<Props> = (props) => {
@@ -48,6 +49,13 @@ const GroupPage: React.FC<Props> = (props) => {
 	}, [group]); // eslint-disable-line react-hooks/exhaustive-deps
 	return (
 		<div className=" p-3 rounded-md bg-secondary-fine h-screen">
+			<Link
+				to="/dashboard/groups"
+				className="flex space-x-2 justify-start items-center text-secondary-dark hover:text-primary-dark mb-2"
+			>
+				<BiLeftArrow className="" />
+				Back
+			</Link>
 			{group ? (
 				<>
 					<div className="bg-secondary-finest rounded-md p-6 shadow">

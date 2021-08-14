@@ -9,14 +9,16 @@ import {
 } from "redux-saga/effects";
 import { loginAPI } from "../api/Auth.api";
 import { fetchGroupAPI, fetchGroupsAPI } from "../api/Group.api";
-import { meAPI } from "../api/User.api";
+import { fetchUserAPI, fetchUsersAPI, meAPI } from "../api/User.api";
 import Group from "../models/Group.model";
 import User from "../models/User.model";
 import {
 	CURRENT_SELECTED_GROUP_ID,
+	CURRENT_SELECTED_USER_ID,
 	GROUP_QUERY,
 	ME_FETCH,
 	ME_LOGIN,
+	USERS_ALL,
 } from "../store/actions/actions.constants";
 import {
 	meFetchedAction,
@@ -27,6 +29,29 @@ import {
 	currentSelectedGroupErrorAction,
 	queryCompleted,
 } from "../store/actions/group.action";
+import {
+	allUserListCompletedAction,
+	currentSelectedUserErrorAction,
+	currentSelectedUserIDCompletedAction,
+} from "../store/actions/user.actions";
+
+function* fetchUser(action: AnyAction): Generator<any> {
+	const id = action.payload as number;
+
+	try {
+		const user = yield call(fetchUserAPI, id);
+		yield put(currentSelectedUserIDCompletedAction(user as User));
+	} catch (error) {
+		const errorMessage =
+			error.response?.data?.message || "Something went wrong!";
+		yield put(currentSelectedUserErrorAction(errorMessage));
+	}
+}
+
+function* fetchUsers(action: AnyAction): Generator<any> {
+	const users = yield call(fetchUsersAPI);
+	yield put(allUserListCompletedAction(users as User[]));
+}
 
 function* login(action: AnyAction): Generator<any> {
 	const { email, password } = action.payload as {
@@ -79,5 +104,7 @@ export function* fetchGroupSaga() {
 		takeEvery(ME_LOGIN, login),
 		takeEvery(ME_FETCH, fetchME),
 		takeEvery(CURRENT_SELECTED_GROUP_ID, fetchGroup),
+		takeEvery(CURRENT_SELECTED_USER_ID, fetchUser),
+		takeEvery(USERS_ALL, fetchUsers),
 	]);
 }

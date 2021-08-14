@@ -20,7 +20,7 @@ const SideBar: React.FC<Props> = () => {
 			>
 				<MenuItem title="Dashboard" Icon={FaHome}>
 					<LinkContent to="/dashboard/groups" title="Groups" />
-					<LinkContent to="/analytics" title="Analytics" />
+					<LinkContent to="/dashboard/users" title="Users" />
 				</MenuItem>
 				<MenuItem title="Apps" Icon={IoIosApps}>
 					<LinkContent to="/chat" title="Chat" />

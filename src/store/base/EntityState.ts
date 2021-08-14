@@ -5,4 +5,5 @@ export interface EntityState<T extends Entity = Entity> {
 	loadingList?: boolean;
 	loadingOne?: boolean;
 	error?: string;
+	currentId?: number;
 }

@@ -33,7 +33,7 @@ export const groupsByQuerySelector = createSelector(
 
 export const currentSelectedGroupIdSelector = createSelector(
 	[groupSelector],
-	(groupState) => groupState.currentSelectedGroupId
+	(groupState) => groupState.currentId
 );
 
 export const currentSelectedGroupSelector = createSelector(

@@ -5,12 +5,13 @@ import { useAppSelector } from "../store/store";
 import GroupPage from "./Group.page";
 import GroupsPage from "./Groups.page";
 import ProfilePage from "./Profile.page";
+import UserPage from "./User.page";
+import UsersPage from "./Users.page";
 
 interface Props {}
 
 const Dashboard: React.FC<Props> = () => {
 	const sideBarState = useAppSelector(sideBarSelector);
-
 	return (
 		<div className="flex">
 			<div
@@ -30,6 +31,12 @@ const Dashboard: React.FC<Props> = () => {
 					</Route>
 					<Route path="/dashboard/profile">
 						<ProfilePage />
+					</Route>
+					<Route path="/dashboard/users">
+						<UsersPage />
+					</Route>
+					<Route path="/dashboard/user/:userId">
+						<UserPage />
 					</Route>
 				</Switch>
 			</div>

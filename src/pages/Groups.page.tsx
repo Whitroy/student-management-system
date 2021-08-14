@@ -9,6 +9,7 @@ import {
 	groupsByQuerySelector,
 } from "../store/selectors/group.selectors";
 import { groupActions } from "../store/binds/group.bind";
+import { useEffect } from "react";
 
 interface Props {}
 
@@ -17,6 +18,10 @@ const GroupsPage: React.FC<Props> = (props) => {
 	const query = useAppSelector(groupQuerySelector);
 	const showLoading = useAppSelector(groupLoadingListSelector);
 	const defaultUI = [1, 2, 3, 4];
+
+	useEffect(() => {
+		groupActions.query("");
+	}, []);
 
 	const handleSearch = useCallback(
 		(event: React.ChangeEvent<HTMLInputElement>) => {

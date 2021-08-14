@@ -50,6 +50,11 @@ const Avatar: React.FC<Props> = ({
 				className={`w-full h-full ${
 					appearance === "rounded" ? "rounded-full" : "rounded-md"
 				} object-cover`}
+				onError={(e: any) => {
+					e.target.onerror = null;
+					e.target.src =
+						"https://thumbs.dreamstime.com/b/default-avatar-man-to-social-user-vector-illustration-default-avatar-man-to-social-user-109538868.jpg";
+				}}
 			/>
 			{showOnline && (
 				<div

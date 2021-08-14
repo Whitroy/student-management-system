@@ -19,9 +19,6 @@ const App: React.FC<Props> = (props) => {
 	useEffect(() => {
 		if (!token) return;
 		authActions.fetch();
-		// me().then((user) => {
-		// 	authActions.fetch(user);
-		// });
 	}, []); // eslint-disable-line react-hooks/exhaustive-deps
 
 	if (token && !userID) {
@@ -51,6 +48,8 @@ const App: React.FC<Props> = (props) => {
 							"/dashboard/groups/group/:groupId",
 							"/recordings/batch/:batchNumber/lecture/:lectureNumber",
 							"/dashboard/profile",
+							"/dashboard/users",
+							"/dashboard/user/:userId",
 						]}
 						exact
 					>

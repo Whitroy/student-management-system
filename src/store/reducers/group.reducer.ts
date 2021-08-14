@@ -13,7 +13,6 @@ import { addMany, addOne, getIds, setError } from "../base/base.reducer";
 export interface GroupState extends EntityState<Group> {
 	query: string;
 
-	currentSelectedGroupId?: number;
 	nextGroupId?: number;
 	prevGroupId?: number;
 
@@ -51,7 +50,7 @@ export const groupReducer: Reducer<GroupState> = (
 			};
 		case CURRENT_SELECTED_GROUP_ID:
 			const id = action.payload as number;
-			if (state.currentSelectedGroupId === id) return state;
+			if (state.currentId === id) return state;
 
 			const currentQueryGroups = state.groupCollections[state.query];
 
@@ -76,7 +75,7 @@ export const groupReducer: Reducer<GroupState> = (
 			} finally {
 				return {
 					...state,
-					currentSelectedGroupId: id,
+					currentId: id,
 					nextGroupId: nextId,
 					prevGroupId: prevId,
 					loadingOne: true,
