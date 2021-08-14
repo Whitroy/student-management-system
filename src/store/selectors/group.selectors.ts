@@ -57,9 +57,20 @@ export const groupPrevIdSelector = createSelector(
 	}
 );
 
-export const groupQueryLoadingSelector = createSelector(
+export const groupLoadingOneSelector = createSelector(
 	[groupSelector],
 	(groupState) => {
-		return groupState.loading;
+		return groupState.loadingOne;
 	}
 );
+
+export const groupLoadingListSelector = createSelector(
+	[groupSelector],
+	(groupState) => {
+		return groupState.loadingList;
+	}
+);
+
+export const groupError = createSelector([groupSelector], (groupState) => {
+	return groupState.error;
+});

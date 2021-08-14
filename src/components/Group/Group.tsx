@@ -1,8 +1,6 @@
 import React from "react";
-import { useCallback } from "react";
-import { useHistory } from "react-router-dom";
+import { Link } from "react-router-dom";
 import GroupModel from "../../models/Group.model";
-import { groupActions } from "../../store/binds/group.bind";
 import H1 from "../Basic/H1";
 import P from "../Basic/P";
 
@@ -21,12 +19,10 @@ const Group: React.FC<Props> = ({
 	className,
 	showDefault,
 }) => {
-	const history = useHistory();
-	const handleClick = useCallback(() => {
-		if (showDefault) return;
-		groupActions.selectedGroupId(id);
-		history.push("/dashboard/groups/group/" + id);
-	}, []); // eslint-disable-line react-hooks/exhaustive-deps
+	// const handleClick = useCallback(() => {
+	// 	if (showDefault) return;
+	// 	groupActions.selectedGroupId(id);
+	// }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
 	return (
 		<div
@@ -47,9 +43,10 @@ const Group: React.FC<Props> = ({
 					showDefault ? "animate-pulse" : ""
 				}`}
 			/>
+
 			<div className="w-full">
 				<div className="flex items-center justify-between">
-					<div onClick={handleClick}>
+					<Link to={showDefault ? "#" : `/dashboard/groups/group/${id}`}>
 						<H1
 							size="text-xl"
 							className={`text-primary-normal ${
@@ -62,7 +59,7 @@ const Group: React.FC<Props> = ({
 						>
 							{!showDefault && name}
 						</H1>
-					</div>
+					</Link>
 					<H1
 						size="text-sm"
 						className={`text-secondary-dark${

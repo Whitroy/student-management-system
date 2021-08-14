@@ -1,9 +1,10 @@
 import Group from "../../models/Group.model";
 import {
-	CURRENT_SELECTED_GROUP,
+	CURRENT_SELECTED_GROUP_ID_COMPLETED,
 	CURRENT_SELECTED_GROUP_ID,
 	GROUP_QUERY,
 	GROUP_QUERY_COMPLETED,
+	CURRENT_SELECTED_GROUP_ERROR,
 } from "./actions.constants";
 
 export const queryAction = (query: string) => ({
@@ -20,7 +21,12 @@ export const currentSelectedGroupAction = (id: number) => ({
 	payload: id,
 });
 
-export const addCurrentSelectedGroupAction = (group: Group) => ({
-	type: CURRENT_SELECTED_GROUP,
+export const currentSelectedGroupCompletedAction = (group: Group) => ({
+	type: CURRENT_SELECTED_GROUP_ID_COMPLETED,
 	payload: group,
+});
+
+export const currentSelectedGroupErrorAction = (error: string) => ({
+	type: CURRENT_SELECTED_GROUP_ERROR,
+	payload: error,
 });

@@ -8,10 +8,12 @@ import {
 	takeEvery,
 } from "redux-saga/effects";
 import { loginAPI } from "../api/Auth.api";
-import { fetchGroupsAPI } from "../api/Group.api";
+import { fetchGroupAPI, fetchGroupsAPI } from "../api/Group.api";
 import { meAPI } from "../api/User.api";
+import Group from "../models/Group.model";
 import User from "../models/User.model";
 import {
+	CURRENT_SELECTED_GROUP_ID,
 	GROUP_QUERY,
 	ME_FETCH,
 	ME_LOGIN,
@@ -20,7 +22,11 @@ import {
 	meFetchedAction,
 	meLoginErrorAction,
 } from "../store/actions/auth.actions";
-import { queryCompleted } from "../store/actions/group.action";
+import {
+	currentSelectedGroupCompletedAction,
+	currentSelectedGroupErrorAction,
+	queryCompleted,
+} from "../store/actions/group.action";
 
 function* login(action: AnyAction): Generator<any> {
 	const { email, password } = action.payload as {
@@ -47,11 +53,23 @@ function* fetchME(action: AnyAction): Generator<any> {
 function* fetchGroups(action: AnyAction): Generator<any> {
 	yield delay(300);
 	console.log("Query Changed!");
+
 	const groupResponse: any = yield call(fetchGroupsAPI, {
 		query: action.payload,
 		status: "all-groups",
 	});
 	yield put(queryCompleted(action.payload, groupResponse.data.data));
+}
+
+function* fetchGroup(action: AnyAction): Generator<any> {
+	try {
+		const group: any = yield call(fetchGroupAPI, { id: action.payload });
+		yield put(currentSelectedGroupCompletedAction(group as Group));
+	} catch (error) {
+		const errorMessage =
+			error.response?.data?.message || "Something went wrong!";
+		yield put(currentSelectedGroupErrorAction(errorMessage));
+	}
 }
 
 export function* fetchGroupSaga() {
@@ -60,5 +78,6 @@ export function* fetchGroupSaga() {
 		takeLatest(GROUP_QUERY, fetchGroups),
 		takeEvery(ME_LOGIN, login),
 		takeEvery(ME_FETCH, fetchME),
+		takeEvery(CURRENT_SELECTED_GROUP_ID, fetchGroup),
 	]);
 }

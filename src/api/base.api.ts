@@ -10,8 +10,6 @@ axios.interceptors.request.use((config) => {
 		return config;
 	}
 
-	console.log("interceptor is running");
-
 	return { ...config, headers: { ...config.headers, Authorization: token } };
 });
 

@@ -1,28 +1,29 @@
 import { Reducer } from "redux";
 import {
-	CURRENT_SELECTED_GROUP,
+	CURRENT_SELECTED_GROUP_ID_COMPLETED,
 	CURRENT_SELECTED_GROUP_ID,
 	GROUP_QUERY,
 	GROUP_QUERY_COMPLETED,
+	CURRENT_SELECTED_GROUP_ERROR,
 } from "../actions/actions.constants";
 import Group from "../../models/Group.model";
 import { EntityState } from "../base/EntityState";
-import { addMany, addOne, getIds } from "../base/base.reducer";
+import { addMany, addOne, getIds, setError } from "../base/base.reducer";
 
 export interface GroupState extends EntityState<Group> {
 	query: string;
+
 	currentSelectedGroupId?: number;
 	nextGroupId?: number;
 	prevGroupId?: number;
+
 	groupCollections: { [query: string]: number[] };
-	loading: boolean;
 }
 
 const intialState: GroupState = {
 	query: "",
 	groupCollections: {},
 	byId: {},
-	loading: false,
 };
 
 export const groupReducer: Reducer<GroupState> = (
@@ -34,7 +35,7 @@ export const groupReducer: Reducer<GroupState> = (
 			return {
 				...state,
 				query: action.payload,
-				loading: true,
+				loadingList: true,
 			};
 		case GROUP_QUERY_COMPLETED:
 			const groups: Group[] = action.payload.groups as Group[];
@@ -46,24 +47,29 @@ export const groupReducer: Reducer<GroupState> = (
 					...state.groupCollections,
 					[action.payload.query]: groupIds,
 				},
-				loading: false,
+				loadingList: false,
 			};
 		case CURRENT_SELECTED_GROUP_ID:
 			const id = action.payload as number;
 			if (state.currentSelectedGroupId === id) return state;
 
-			const currentQuerryGroups = state.groupCollections[state.query];
+			const currentQueryGroups = state.groupCollections[state.query];
+
 			let nextId = id;
 			let prevId = id;
 			//check invalid url id
 			try {
-				const currentIndex = currentQuerryGroups.indexOf(id);
-				if (currentIndex !== 0) {
-					prevId = currentQuerryGroups[currentIndex - 1];
+				const currentIndex = currentQueryGroups.indexOf(id);
+
+				if (currentIndex !== -1 && currentIndex !== 0) {
+					prevId = currentQueryGroups[currentIndex - 1];
 				}
 
-				if (currentIndex !== currentQuerryGroups.length - 1) {
-					nextId = currentQuerryGroups[currentIndex + 1];
+				if (
+					currentIndex !== -1 &&
+					currentIndex !== currentQueryGroups.length - 1
+				) {
+					nextId = currentQueryGroups[currentIndex + 1];
 				}
 			} catch (e) {
 				console.log(e.message);
@@ -73,11 +79,14 @@ export const groupReducer: Reducer<GroupState> = (
 					currentSelectedGroupId: id,
 					nextGroupId: nextId,
 					prevGroupId: prevId,
+					loadingOne: true,
 				};
 			}
-		case CURRENT_SELECTED_GROUP:
+		case CURRENT_SELECTED_GROUP_ID_COMPLETED:
 			const group: Group = action.payload as Group;
 			return addOne(state, group) as GroupState;
+		case CURRENT_SELECTED_GROUP_ERROR:
+			return setError(state, action.payload) as GroupState;
 		default:
 			return state;
 	}

@@ -30,7 +30,7 @@ export const fetchGroupsAPI = (data?: GroupRequest, token?: CancelToken) => {
 	});
 };
 
-export const fetchGroup = async (data: IndiGroupRequest) => {
+export const fetchGroupAPI = async (data: IndiGroupRequest) => {
 	const url = BASE_URL + "/groups/" + data.id;
 	const response = await axios.get<IndiGroupResponse>(url, {
 		params: data,

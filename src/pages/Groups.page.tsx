@@ -4,7 +4,7 @@ import Group from "../components/Group/Group";
 import SearchBar from "../components/SearchBar/SearchBar";
 import { useAppSelector } from "../store/store";
 import {
-	groupQueryLoadingSelector,
+	groupLoadingListSelector,
 	groupQuerySelector,
 	groupsByQuerySelector,
 } from "../store/selectors/group.selectors";
@@ -15,10 +15,8 @@ interface Props {}
 const GroupsPage: React.FC<Props> = (props) => {
 	const groups = useAppSelector(groupsByQuerySelector);
 	const query = useAppSelector(groupQuerySelector);
-	const showLoading = useAppSelector(groupQueryLoadingSelector);
+	const showLoading = useAppSelector(groupLoadingListSelector);
 	const defaultUI = [1, 2, 3, 4];
-
-	console.log("Group page render", showLoading);
 
 	const handleSearch = useCallback(
 		(event: React.ChangeEvent<HTMLInputElement>) => {
@@ -33,8 +31,13 @@ const GroupsPage: React.FC<Props> = (props) => {
 				groups.length < 4 ? "h-screen" : ""
 			}`}
 		>
-			<SearchBar onChange={handleSearch} value={query} />
-			{showLoading &&
+			<SearchBar
+				onChange={handleSearch}
+				value={query}
+				searching={showLoading}
+			/>
+			{groups.length === 0 &&
+				showLoading &&
 				defaultUI.map((value, index) => (
 					<Group
 						id={value}
@@ -49,7 +52,7 @@ const GroupsPage: React.FC<Props> = (props) => {
 						showDefault={true}
 					/>
 				))}
-			{!showLoading &&
+			{(!showLoading || groups.length > 0) &&
 				groups.map((group, index) => {
 					return (
 						<Group

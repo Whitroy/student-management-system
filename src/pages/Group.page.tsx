@@ -1,11 +1,12 @@
-import React, { useState } from "react";
+import React from "react";
 import { useEffect } from "react";
 import { useHistory, useParams } from "react-router-dom";
-import { fetchGroup } from "../api/Group.api";
 import Button from "../components/Button/Button";
 import {
 	currentSelectedGroupIdSelector,
 	currentSelectedGroupSelector,
+	groupError,
+	groupLoadingOneSelector,
 	groupNextIdSelector,
 	groupPrevIdSelector,
 } from "../store/selectors/group.selectors";
@@ -20,30 +21,19 @@ import { groupActions } from "../store/binds/group.bind";
 interface Props {}
 
 const GroupPage: React.FC<Props> = (props) => {
-	const { groupId } = useParams<any>();
+	const groupId = +useParams<{ groupId: string }>().groupId;
+	const history = useHistory();
+
 	const group = useAppSelector(currentSelectedGroupSelector);
 	const currID = useAppSelector(currentSelectedGroupIdSelector);
 	const prevId = useAppSelector(groupPrevIdSelector);
 	const nextId = useAppSelector(groupNextIdSelector);
-	const history = useHistory();
-	console.log("render group");
-	const [showLoading, setShowLoading] = useState(true);
+	const showLoading = useAppSelector(groupLoadingOneSelector);
+	const error = useAppSelector(groupError);
 
 	useEffect(() => {
-		if (group) setShowLoading(false);
-		fetchGroup({ id: groupId })
-			.then((groupResponse) => {
-				groupActions.selectedGroup(groupResponse);
-				if (group === undefined) {
-					groupActions.selectedGroupId(groupId);
-					setShowLoading(false);
-				}
-			})
-			.catch((error) => {
-				console.log(error.message);
-				setShowLoading(false);
-			});
-	}, [groupId]); // eslint-disable-line react-hooks/exhaustive-deps
+		groupActions.selectedGroupId(groupId);
+	}, []); // eslint-disable-line react-hooks/exhaustive-deps
 
 	const handleLeftClick = useCallback(() => {
 		if (prevId === currID || prevId === undefined) return;
@@ -102,9 +92,11 @@ const GroupPage: React.FC<Props> = (props) => {
 								onClick={handleLeftClick}
 							/>
 						)}
-						<H1 size="text-md" className="w-32 ">
-							{group.name}
-						</H1>
+						{(prevId !== currID || nextId !== currID) && (
+							<H1 size="text-md" className="w-32 ">
+								{group.name}
+							</H1>
+						)}
 						{nextId !== currID && (
 							<Button
 								Icon={AiOutlineRight}
@@ -119,9 +111,7 @@ const GroupPage: React.FC<Props> = (props) => {
 			) : showLoading ? (
 				<FaSpinner className="h-12 w-12 animate-spin m-auto mt-52" />
 			) : (
-				<H1 className="ml-52 mt-52 text-secondary-dark">
-					Group with ID {groupId} doesn't exist!
-				</H1>
+				<H1 className="ml-52 mt-52 text-danger-dark">{error}</H1>
 			)}
 		</div>
 	);

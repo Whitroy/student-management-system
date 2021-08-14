@@ -1,10 +1,11 @@
 import { bindActionCreators } from "redux";
 import { store } from "../store";
 import {
-	addCurrentSelectedGroupAction,
+	currentSelectedGroupCompletedAction,
 	currentSelectedGroupAction,
 	queryAction,
 	queryCompleted,
+	currentSelectedGroupErrorAction,
 } from "../actions/group.action";
 
 export const groupActions = bindActionCreators(
@@ -12,7 +13,8 @@ export const groupActions = bindActionCreators(
 		query: queryAction,
 		queryCompleted: queryCompleted,
 		selectedGroupId: currentSelectedGroupAction,
-		selectedGroup: addCurrentSelectedGroupAction,
+		selectedGroup: currentSelectedGroupCompletedAction,
+		selectedGroupError: currentSelectedGroupErrorAction,
 	},
 	store.dispatch
 );
