@@ -15,7 +15,6 @@ interface Props {}
 const App: React.FC<Props> = (props) => {
 	const userID = useAppSelector(meIdSelector);
 	const token = localStorage.getItem(LOGIN_TOKEN_KEY);
-	console.log("App render");
 	useEffect(() => {
 		if (!token) return;
 		authActions.fetch();
